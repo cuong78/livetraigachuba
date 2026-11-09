@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { recordingApi } from "@/services/api";
 import "./VideoPage.css";
 
 interface Video {
@@ -21,15 +22,24 @@ function VideoPage() {
     // Fetch videos from API
     const fetchVideos = async () => {
       try {
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_API_URL || "https://api.gachoixombau.com"
-          }/api/recordings`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setVideos(data);
-        }
+        const data = await recordingApi.getRecentRecordings();
+        const mapped: Video[] = data.map((rec) => ({
+          id: String(rec.id),
+          title: rec.title,
+          description: `Video xem lại ngày ${rec.recordingDate}`,
+          url: rec.videoUrl,
+          thumbnail:
+            rec.thumbnailUrl ||
+            "https://res.cloudinary.com/duklfdbqf/image/upload/v1775980790/Gemini_Generated_Image_exktyexktyexktye_j9by4s.png",
+          duration:
+            rec.durationSeconds > 0
+              ? `${Math.floor(rec.durationSeconds / 60)}:${(rec.durationSeconds % 60)
+                  .toString()
+                  .padStart(2, "0")}`
+              : "Xem lại",
+          date: rec.recordingDate,
+        }));
+        setVideos(mapped);
       } catch (error) {
         console.error("Error fetching videos:", error);
       } finally {
@@ -57,11 +67,11 @@ function VideoPage() {
           <Link to="/" className="logo-link">
             <img
               src="https://res.cloudinary.com/duklfdbqf/image/upload/v1775980884/z7717265863028_a76f1d37e4de786693f363c34c57843b_f7kiq3.jpg"
-              alt="Logo Gà Chọi Xóm Bầu"
+              alt="Logo Trại Gà Ba Anh Em"
               className="header-logo"
             />
             <div className="header-text">
-              <h1>Gà Chọi Xóm Bầu</h1>
+              <h1>Trại Gà Ba Anh Em</h1>
               <p className="header-subtitle">
                 Kích vào trang chủ để xem video trực tiếp
               </p>
@@ -219,8 +229,7 @@ function VideoPage() {
       {/* Footer */}
       <footer className="page-footer">
         <p>
-          © 2025 Gà Chọi Xóm Bầu - Thôn Giai Sơn, An Mỹ, Tuy An, Phú
-          Yên
+          © 2026 Trại Gà Ba Anh Em
         </p>
         <p>
           Hotline/Zalo: <a href="tel:0354596261">0354596261</a>

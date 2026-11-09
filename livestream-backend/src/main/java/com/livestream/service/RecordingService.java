@@ -141,7 +141,7 @@ public class RecordingService {
     private void ensureDailyRecordingExists(LocalDate date) {
         if (!dailyRecordingRepository.existsByRecordingDate(date)) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String title = "Video Xem Lại Tối " + date.format(formatter) + " – Gà Chọi Xóm Bầu";
+            String title = "Video Xem Lại Tối " + date.format(formatter) + " – Trại Gà Ba Anh Em";
             
             DailyRecording dailyRecording = DailyRecording.builder()
                     .recordingDate(date)

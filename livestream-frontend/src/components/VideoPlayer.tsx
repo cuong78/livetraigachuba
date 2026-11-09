@@ -25,12 +25,18 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ hlsUrl }) => {
       const hls = new Hls({
         debug: false,
         enableWorker: true,
-        lowLatencyMode: true,
+        lowLatencyMode: false,
         backBufferLength: 90,
-        maxBufferLength: 30,
-        maxMaxBufferLength: 60,
-        liveSyncDurationCount: 3,
-        liveMaxLatencyDurationCount: 10,
+        maxBufferLength: 60,
+        maxMaxBufferLength: 120,
+        liveSyncDurationCount: 5,
+        liveMaxLatencyDurationCount: 15,
+        manifestLoadingTimeOut: 10000,
+        manifestLoadingMaxRetry: 6,
+        levelLoadingTimeOut: 10000,
+        levelLoadingMaxRetry: 6,
+        fragLoadingTimeOut: 20000,
+        fragLoadingMaxRetry: 8,
       });
 
       hls.loadSource(hlsUrl);
@@ -51,13 +57,24 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ hlsUrl }) => {
         });
       });
 
+      let networkRetryCount = 0;
+      const MAX_NETWORK_RETRIES = 5;
+
       hls.on(Hls.Events.ERROR, (_, data) => {
         console.error("HLS error:", data);
         if (data.fatal) {
           switch (data.type) {
             case Hls.ErrorTypes.NETWORK_ERROR:
-              console.log("Network error, trying to recover...");
-              hls.startLoad();
+              if (networkRetryCount < MAX_NETWORK_RETRIES) {
+                networkRetryCount++;
+                console.log(`Network error, retrying (${networkRetryCount}/${MAX_NETWORK_RETRIES}) in 2s...`);
+                setTimeout(() => {
+                  hls.startLoad();
+                }, 2000);
+              } else {
+                setError("Mất kết nối mạng khi tải stream. Vui lòng tải lại trang.");
+                hls.destroy();
+              }
               break;
             case Hls.ErrorTypes.MEDIA_ERROR:
               console.log("Media error, trying to recover...");

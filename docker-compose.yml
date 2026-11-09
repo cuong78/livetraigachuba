@@ -80,8 +80,8 @@ services:
       SPRING_REDIS_PORT: 6379
       RECORDING_BASE_PATH: /recordings
       RECORDING_OUTPUT_PATH: /videos
-      RECORDING_VIDEO_URL_BASE: http://192.168.1.9:8081/videos
-      RECORDING_THUMBNAIL_URL_BASE: http://192.168.1.9:8081/videos/thumbnails
+      RECORDING_VIDEO_URL_BASE: ${RECORDING_VIDEO_URL_BASE:-http://localhost:8081/videos}
+      RECORDING_THUMBNAIL_URL_BASE: ${RECORDING_THUMBNAIL_URL_BASE:-http://localhost:8081/videos/thumbnails}
       RECORDING_RETENTION_DAYS: 3
     volumes:
       - recordings_data:/recordings

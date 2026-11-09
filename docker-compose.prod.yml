@@ -64,6 +64,7 @@ services:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: ${SPRING_JPA_HIBERNATE_DDL_AUTO:-update}
       SPRING_REDIS_HOST: ${SPRING_REDIS_HOST}
       SPRING_REDIS_PORT: ${SPRING_REDIS_PORT}
       SPRING_REDIS_PASSWORD: ${SPRING_REDIS_PASSWORD}
@@ -90,7 +91,7 @@ services:
       - livestream-network
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8080/api/actuator/health || exit 1"]
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:8080/api/stream/current || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -101,6 +102,10 @@ services:
     build:
       context: ./livestream-frontend
       dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-/api}
+        VITE_WS_URL: ${VITE_WS_URL:-/api/ws/chat}
+        VITE_HLS_BASE_URL: ${VITE_HLS_BASE_URL:-https://traigabaanhem.com/live}
     image: livestream-frontend:local
     container_name: livestream-frontend
     ports:

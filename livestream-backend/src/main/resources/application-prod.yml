@@ -21,7 +21,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate # NEVER use 'update' in production
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
     show-sql: false
     properties:
       hibernate:
@@ -65,7 +65,7 @@ jwt:
 
 # CORS Configuration
 cors:
-  allowed-origins: ${CORS_ALLOWED_ORIGINS}
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:https://traigabaanhem.com,http://localhost:3000}
   allowed-methods: GET,POST,PUT,DELETE,OPTIONS
   allowed-headers: "*"
   allow-credentials: true
@@ -76,7 +76,7 @@ stream:
   rtmp:
     url: ${STREAM_RTMP_URL:rtmp://srs:1935/live}
   hls:
-    base-url: ${STREAM_HLS_BASE_URL:https://gachoixombau.com}
+    base-url: ${STREAM_HLS_BASE_URL:https://traigabaanhem.com}
     segment-duration: 2
   max-viewers: 10000
 
@@ -84,8 +84,8 @@ stream:
 recording:
   base-path: ${RECORDING_BASE_PATH:/recordings}
   output-path: ${RECORDING_OUTPUT_PATH:/videos}
-  video-url-base: ${RECORDING_VIDEO_URL_BASE:https://gachoixombau.com/videos}
-  thumbnail-url-base: ${RECORDING_THUMBNAIL_URL_BASE:https://gachoixombau.com/videos/thumbnails}
+  video-url-base: ${RECORDING_VIDEO_URL_BASE:https://traigabaanhem.com/videos}
+  thumbnail-url-base: ${RECORDING_THUMBNAIL_URL_BASE:https://traigabaanhem.com/videos/thumbnails}
   retention-days: ${RECORDING_RETENTION_DAYS:3}
 
 # Goong Maps API Configuration

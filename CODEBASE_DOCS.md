@@ -497,13 +497,13 @@ api.interceptors.response.use(
 | 1 | Fix FFmpeg timestamp (`-c:a aac`, `-avoid_negative_ts`, `-fflags +genpts`) | `RecordingService.java` | ✅ Đã hoàn thành |
 | 2 | Fix stuck PROCESSING (reset sau 30 phút) | `RecordingService.java` | ✅ Đã hoàn thành |
 | 3 | Kiểm tra file stable trước khi merge | `RecordingService.java` | ✅ Đã hoàn thành |
-| 4 | Auto-merge khi unpublish (delay 30s) | `StreamController.java` | ⏳ Chờ thực hiện |
+| 4 | Auto-merge khi unpublish (delay 30s) | `StreamController.java` | ✅ Đã hoàn thành |
 | 5 | Access token vĩnh viễn (`expiration=0`) | `JwtService.java`, `application.yml`, `api.ts` | ✅ Đã hoàn thành |
-| 6 | Fix URL hardcode IP LAN | `docker-compose.yml`, `.env` | ⏳ Chờ thực hiện |
-| 7 | Tối ưu VideoPlayer buffer | `VideoPlayer.tsx` | ⏳ Chờ thực hiện |
-| 8 | Bật hls_cleanup SRS | `srs.conf` | ⏳ Chờ thực hiện |
-| 9 | Cache headers Nginx HLS | `nginx-hls.conf` | ⏳ Chờ thực hiện |
-| 10 | Cron job tự động merge 00:30 AM | `RecordingScheduler.java` | ⏳ Chờ thực hiện |
+| 6 | Fix URL hardcode IP LAN | `docker-compose.yml`, `.env`, `application-prod.yml` | ✅ Đã hoàn thành |
+| 7 | Tối ưu VideoPlayer buffer | `VideoPlayer.tsx` | ✅ Đã hoàn thành |
+| 8 | Bật hls_cleanup SRS | `srs.conf` | ✅ Đã hoàn thành |
+| 9 | Cache headers Nginx HLS | `nginx-hls.conf` | ✅ Đã hoàn thành |
+| 10 | Cron job tự động merge 00:30 AM | `RecordingScheduler.java` | ✅ Đã hoàn thành |
 
 ---
 

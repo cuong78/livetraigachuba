@@ -10,8 +10,8 @@ RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:17-jre-alpine
 
-# Install FFmpeg for video processing
-RUN apk add --no-cache ffmpeg
+# Install FFmpeg and curl for video processing and health checks
+RUN apk add --no-cache ffmpeg curl
 
 WORKDIR /app
 

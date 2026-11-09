@@ -10,11 +10,11 @@ function QuyDinhPage() {
           <Link to="/" className="logo-link">
             <img
               src="https://res.cloudinary.com/duklfdbqf/image/upload/v1775980884/z7717265863028_a76f1d37e4de786693f363c34c57843b_f7kiq3.jpg"
-              alt="Logo Gà Chọi Xóm Bầu"
+              alt="Logo Trại Gà Ba Anh Em"
               className="header-logo"
             />
             <div className="header-text">
-              <h1>Gà Chọi Xóm Bầu</h1>
+              <h1>Trại Gà Ba Anh Em</h1>
               <p className="header-subtitle">
                 Kích vào trang chủ để xem video trực tiếp
               </p>
@@ -204,8 +204,7 @@ function QuyDinhPage() {
       {/* Footer */}
       <footer className="page-footer">
         <p>
-          © 2025 Gà Chọi Xóm Bầu - Thôn Giai Sơn, An Mỹ, Tuy An, Phú
-          Yên
+          © 2026 Trại Gà Ba Anh Em
         </p>
         <p>
           Hotline/Zalo: <a href="tel:0354596261">0354596261</a>

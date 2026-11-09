@@ -35,7 +35,7 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-PROJECT_DIR="/var/www/livestream"
+PROJECT_DIR="${PROJECT_DIR:-/root/livetraigachuba}"
 
 echo "Bước 1: Dừng và xóa tất cả containers..."
 cd $PROJECT_DIR 2>/dev/null || mkdir -p $PROJECT_DIR && cd $PROJECT_DIR

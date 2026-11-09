@@ -1,7 +1,7 @@
 {
-  "name": "Gà Chọi Xóm Bầu - Gà Chọi Xóm Bầu | Xổ Gà Trực Tiếp 18h Hàng Ngày",
-  "short_name": "Gà Chọi Xóm Bầu",
-  "description": "Gà Chọi Xóm Bầu - Trại Gà Chọi Xóm Bầu, chuyên xổ gà trực tiếp 18h hàng ngày tại Thôn Mỹ Xuân 2, xã Hoà Thịnh, Tây Hoà, Phú Yên (Daklak mới). Livestream vần xổ gà chọi chất lượng cao, giao lưu mua bán gà chọi cao cấp đi các tỉnh. Hotline: 0354596261",
+  "name": "Trại Gà Ba Anh Em | Xổ Gà Trực Tiếp 18h Hàng Ngày",
+  "short_name": "Trại Gà Ba Anh Em",
+  "description": "Trại Gà Ba Anh Em, chuyên xổ gà trực tiếp 18h hàng ngày. Livestream vần xổ gà chọi chất lượng cao.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -72,7 +72,7 @@
       "sizes": "1200x630",
       "type": "image/jpeg",
       "form_factor": "wide",
-      "label": "Gà Chọi Xóm Bầu - Trang chủ"
+      "label": "Trại Gà Ba Anh Em - Trang chủ"
     }
   ],
   "shortcuts": [
@@ -92,7 +92,7 @@
     {
       "name": "Liên Hệ",
       "short_name": "Liên Hệ",
-      "description": "Liên hệ Gà Chọi Xóm Bầu",
+      "description": "Liên hệ Trại Gà Ba Anh Em",
       "url": "/lien-he",
       "icons": [
         {
@@ -105,7 +105,7 @@
     {
       "name": "Giới Thiệu",
       "short_name": "Giới Thiệu",
-      "description": "Về Gà Chọi Xóm Bầu",
+      "description": "Về Trại Gà Ba Anh Em",
       "url": "/gioi-thieu",
       "icons": [
         {
@@ -118,7 +118,7 @@
   ],
   "related_applications": [],
   "prefer_related_applications": false,
-  "id": "gachoixombau-pwa",
+  "id": "traigabaanhem-pwa",
   "iarc_rating_id": "",
   "edge_side_panel": {
     "preferred_width": 400

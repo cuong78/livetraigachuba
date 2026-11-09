@@ -1,31 +1,19 @@
-# Lệnh curl để đăng ký tài khoản
+# Lệnh curl để đăng ký tài khoản Admin
 
-# Cách 1: Với email mặc định
-curl -X POST "https://gachoixombau.com/api/auth/register" \
+# Cách 1: Đăng ký trực tiếp qua domain (khi đã cấu hình SSL)
+curl -X POST "https://traigabaanhem.com/api/auth/register" \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "xombau",
-    "password": "xombau123",
-    "email": "xombau123@example.com"
+    "username": "admin",
+    "password": "your_secure_password",
+    "email": "admin@traigabaanhem.com"
   }'
 
-# Cách 2: Với email tùy chỉnh (thay YOUR_EMAIL@example.com)
-curl -X POST "https://gachoixombau.com/api/auth/register" \
+# Cách 2: Đăng ký cục bộ qua localhost port 8080 (ngay sau khi docker start)
+curl -X POST "http://localhost:8080/api/auth/register" \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "anhut7979",
-    "password": "anhut7979",
-    "email": "YOUR_EMAIL@example.com"
+    "username": "admin",
+    "password": "your_secure_password",
+    "email": "admin@traigabaanhem.com"
   }'
-
-# Cách 3: Format đẹp hơn với jq (nếu đã cài jq)
-curl -X POST "https://gachoixombau.com/api/auth/register" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "anhut7979",
-    "password": "anhut7979",
-    "email": "anhut7979@example.com"
-  }' | jq '.'
-
-# Cách 4: Một dòng (dễ copy)
-curl -X POST "https://gachoixombau.com/api/auth/register" -H "Content-Type: application/json" -d '{"username":"xombau","password":"xombau123","email":"xombau@example.com"}'

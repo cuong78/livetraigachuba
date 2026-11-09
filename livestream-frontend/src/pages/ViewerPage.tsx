@@ -296,11 +296,11 @@ const ViewerPage = () => {
             <div className="logo-section">
               <img
                 src="https://res.cloudinary.com/duklfdbqf/image/upload/v1775980884/z7717265863028_a76f1d37e4de786693f363c34c57843b_f7kiq3.jpg"
-                alt="Gà Chọi Xóm Bầu"
+                alt="Trại Gà Ba Anh Em"
                 className="logo"
               />
               <div className="site-title">
-                <h1>Gà Chọi Xóm Bầu</h1>
+                <h1>Trại Gà Ba Anh Em</h1>
                 <p className="subtitle">Tinh Hoa Việt</p>
               </div>
             </div>
@@ -397,7 +397,7 @@ const ViewerPage = () => {
               <div className="video-placeholder">
                 <img
                   src="https://res.cloudinary.com/duklfdbqf/image/upload/v1775980790/Gemini_Generated_Image_exktyexktyexktye_j9by4s.png"
-                  alt="Gà Chọi Xóm Bầu"
+                  alt="Trại Gà Ba Anh Em"
                   className="cover-image"
                 />
                 <div className="play-button-overlay">
@@ -499,7 +499,7 @@ const ViewerPage = () => {
 
             {/* Google Map Section */}
             {/* <div className="map-section">
-              <h3 className="map-title">📍 Vị Trí Gà Chọi Xóm Bầu</h3>
+              <h3 className="map-title">📍 Vị Trí Trại Gà Ba Anh Em</h3>
               <div className="address-display">
                 <p className="address-text">
                   Địa chỉ: Thôn Mỹ Xuân 2, xã Hoà Thịnh, Tây Hoà, Phú Yên (Daklak mới)
@@ -551,7 +551,7 @@ const ViewerPage = () => {
           <div className="branding-container">
             <img 
               src="/thuonghieu.jpg" 
-              alt="Thành tích và giải thưởng Gà Chọi Xóm Bầu"
+              alt="Thành tích và giải thưởng Trại Gà Ba Anh Em"
               className="branding-image"
               loading="lazy"
             />
@@ -720,26 +720,25 @@ const ViewerPage = () => {
               <div className="modal-body">
                 <p>
                   • Chào mừng bạn đến với{" "}
-                  <strong>Gà Chọi Xóm Bầu</strong> (Gà Chọi Xóm Bầu) nơi tạo ra sân chơi
-                  phục vụ niềm đam mê gà đòn cho anh em 24/7. Gà Chọi Xóm Bầu là CLB gà chọi
-                  hàng đầu tại Phú Yên.
+                  <strong>Trại Gà Ba Anh Em</strong> nơi tạo ra sân chơi
+                  phục vụ niềm đam mê gà đòn cho anh em 24/7.
                 </p>
                 <p>
-                  • Tại Gà Chọi Xóm Bầu bạn có thể tìm hiểu về kiến
+                  • Tại Trại Gà Ba Anh Em bạn có thể tìm hiểu về kiến
                   thức về gà đòn, hay đơn giản là thưởng thức những video xổ gà
-                  trong những lúc rảnh rỗi. Gà Chọi Xóm Bầu sẽ đưa đến cho bạn những thông
+                  trong những lúc rảnh rỗi. Trại Gà Ba Anh Em sẽ đưa đến cho bạn những thông
                   tin mới nhất về giống gà đòn, kinh nghiệm chăm sóc gà, cách
                   huấn luyện gà chọi và nhiều hơn thế nữa.
                 </p>
                 <p>
-                  • <strong>Gà Chọi Xóm Bầu</strong> còn cung cấp con
+                  • <strong>Trại Gà Ba Anh Em</strong> còn cung cấp con
                   giống gà đòn cho những ai đang quan tâm đến việc nuôi gà đòn.
-                  Gà Chọi Xóm Bầu cam kết chất lượng và uy tín.
+                  Trại Gà Ba Anh Em cam kết chất lượng và uy tín.
                 </p>
                 <div className="intro-images">
                   <img
                     src="https://res.cloudinary.com/duklfdbqf/image/upload/v1775980790/Gemini_Generated_Image_exktyexktyexktye_j9by4s.png"
-                    alt="CLB Gà Chọi"
+                    alt="Trại Gà Ba Anh Em"
                   />
                 </div>
               </div>
@@ -795,10 +794,10 @@ const ViewerPage = () => {
         <div className="container">
           <div className="footer-grid">
             <div className="footer-col">
-              <h3>Gà Chọi Xóm Bầu</h3>
+              <h3>Trại Gà Ba Anh Em</h3>
               <ul>
                 <li>• Vần xổ gà trực tiếp 18h hàng ngày</li>
-                <li>• Giao lưu mua bán gà chọi đi các tỉnh</li>
+                <li>• Giao lưu kết nối đam mê gà chọi</li>
               </ul>
               <h3>Chuyển Khoản</h3>
               <p>🏦 Sacombank</p>
@@ -852,7 +851,7 @@ const ViewerPage = () => {
               <h3>Quy Định</h3>
               <ul>
                 <li>
-                  • Website Gà Chọi Xóm Bầu hoạt động với hình thức
+                  • Website Trại Gà Ba Anh Em hoạt động với hình thức
                   giải trí, vui lòng không cá độ dưới mọi hình thức vi phạm pháp
                   luật Việt Nam
                 </li>
@@ -864,12 +863,7 @@ const ViewerPage = () => {
             </div>
           </div>
           <div className="footer-bottom">
-            <p
-              style={{ fontSize: "16px", fontWeight: "bold", color: "#ffd700" }}
-            >
-              🎨 Thiết kế bởi Anh Cương  - ☎️ 0387683857
-            </p>
-            <p>Bản quyền thuộc về Gà Chọi Xóm Bầu © 2025</p>
+            <p>Bản quyền thuộc về Trại Gà Ba Anh Em © 2026</p>
           </div>
         </div>
       </footer>

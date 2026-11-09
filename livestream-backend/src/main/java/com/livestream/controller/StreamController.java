@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/stream")
@@ -98,6 +101,17 @@ public class StreamController {
                 
                 // Mark all active recordings as complete
                 recordingService.markAllActiveRecordingsComplete(stream);
+
+                // Auto-trigger merge after 30 seconds delay so SRS finishes sending the last DVR callback
+                LocalDate today = LocalDate.now();
+                CompletableFuture.delayedExecutor(30, TimeUnit.SECONDS).execute(() -> {
+                    try {
+                        log.info("Triggering automatic merge after stream unpublish for date: {}", today);
+                        recordingService.triggerMerge(today);
+                    } catch (Exception e) {
+                        log.error("Error in delayed auto-merge for date: {}", today, e);
+                    }
+                });
             }
         } catch (Exception e) {
             log.error("Error in unpublish callback", e);
