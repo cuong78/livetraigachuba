@@ -536,7 +536,7 @@ const ViewerPage = () => {
                 Tên người nhận: <strong>Trần Thanh Phong</strong>
               </p>
               <p>
-                : <strong>050127110287</strong>
+                Số tài khoản: <strong>050127110287</strong>
               </p>
               <button className="btn-copy" onClick={copyBankAccount}>
                 📋 Sao chép STK
@@ -767,7 +767,7 @@ const ViewerPage = () => {
               <h3>Chuyển Khoản</h3>
               <p>🏦 Sacombank</p>
               <p>
-                💳 STK: <strong>0354596261</strong>
+                💳 STK: <strong>050127110287</strong>
               </p>
               <p>👤Trần Thanh Phong</p>
             </div>
