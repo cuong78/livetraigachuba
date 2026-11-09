@@ -13,8 +13,6 @@ import "./ViewerPage.css";
 const ViewerPage = () => {
   const [stream, setStream] = useState<Stream | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [showIntro, setShowIntro] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -48,10 +46,9 @@ const ViewerPage = () => {
       try {
         const currentStream = await streamApi.getCurrentStream();
         setStream(currentStream);
-        setLoading(false);
       } catch (err) {
-        setError("Không thể tải stream. Vui lòng thử lại sau.");
-        setLoading(false);
+        console.warn("Could not fetch current stream, showing offline cover placeholder", err);
+        setStream(null);
       }
     };
 
@@ -146,9 +143,7 @@ const ViewerPage = () => {
     }
   };
 
-  const handleReload = () => {
-    window.location.reload();
-  };
+
 
   const copyBankAccount = () => {
     navigator.clipboard.writeText("0799478478");
@@ -235,26 +230,7 @@ const ViewerPage = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-        <div className="loading-text">Đang tải...</div>
-      </div>
-    );
-  }
 
-  if (error) {
-    return (
-      <div className="error-container">
-        <div className="error-icon">⚠️</div>
-        <div className="error-text">{error}</div>
-        <button className="btn-reload" onClick={handleReload}>
-          Tải lại trang
-        </button>
-      </div>
-    );
-  }
 
   const getCurrentDate = () => {
     const today = new Date();
