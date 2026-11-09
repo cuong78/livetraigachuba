@@ -295,7 +295,7 @@ const ViewerPage = () => {
           <div className="header-content">
             <div className="logo-section">
               <img
-                src="https://res.cloudinary.com/duklfdbqf/image/upload/v1775980884/z7717265863028_a76f1d37e4de786693f363c34c57843b_f7kiq3.jpg"
+                src="https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp"
                 alt="Trại Gà Ba Anh Em"
                 className="logo"
               />
@@ -396,7 +396,7 @@ const ViewerPage = () => {
             ) : (
               <div className="video-placeholder">
                 <img
-                  src="https://res.cloudinary.com/duklfdbqf/image/upload/v1775980790/Gemini_Generated_Image_exktyexktyexktye_j9by4s.png"
+                  src="https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp"
                   alt="Trại Gà Ba Anh Em"
                   className="cover-image"
                 />
@@ -648,7 +648,7 @@ const ViewerPage = () => {
                     <img
                       src={
                         recording.thumbnailUrl ||
-                        "https://res.cloudinary.com/duklfdbqf/image/upload/v1775980790/Gemini_Generated_Image_exktyexktyexktye_j9by4s.png"
+                        "https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp"
                       }
                       alt={recording.title}
                     />
@@ -711,7 +711,7 @@ const ViewerPage = () => {
               </button>
               <div className="modal-header">
                 <img
-                  src="https://res.cloudinary.com/duklfdbqf/image/upload/v1775980884/z7717265863028_a76f1d37e4de786693f363c34c57843b_f7kiq3.jpg"
+                  src="https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp"
                   alt="Logo"
                   className="modal-logo"
                 />
@@ -737,7 +737,7 @@ const ViewerPage = () => {
                 </p>
                 <div className="intro-images">
                   <img
-                    src="https://res.cloudinary.com/duklfdbqf/image/upload/v1775980790/Gemini_Generated_Image_exktyexktyexktye_j9by4s.png"
+                    src="https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp"
                     alt="Trại Gà Ba Anh Em"
                   />
                 </div>
