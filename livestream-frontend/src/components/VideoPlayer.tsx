@@ -127,6 +127,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ hlsUrl }) => {
     <div className="video-player-wrapper">
       <video
         ref={videoRef}
+        poster="https://res.cloudinary.com/duklfdbqf/image/upload/v1794207357/Gemini_Generated_Image_of30onof30onof30_pqgmxe.webp"
         controls
         className="video-player"
         playsInline

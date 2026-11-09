@@ -30,7 +30,7 @@ function VideoPage() {
           url: rec.videoUrl,
           thumbnail:
             rec.thumbnailUrl ||
-            "https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp",
+            "https://res.cloudinary.com/duklfdbqf/image/upload/v1794207357/Gemini_Generated_Image_of30onof30onof30_pqgmxe.webp",
           duration:
             rec.durationSeconds > 0
               ? `${Math.floor(rec.durationSeconds / 60)}:${(rec.durationSeconds % 60)

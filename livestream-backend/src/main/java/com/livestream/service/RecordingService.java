@@ -278,7 +278,7 @@ public class RecordingService {
                     return false;
                 }
                 // Use simple base image as thumbnail (date will be shown in title below)
-                String thumbnailUrl = "https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp";
+                String thumbnailUrl = "https://res.cloudinary.com/duklfdbqf/image/upload/v1794207357/Gemini_Generated_Image_of30onof30onof30_pqgmxe.webp";
                 
                 // Get duration and file size
                 long duration = getVideoDuration(outputFilePath);

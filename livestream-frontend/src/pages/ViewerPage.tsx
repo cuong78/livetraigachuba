@@ -396,8 +396,8 @@ const ViewerPage = () => {
             ) : (
               <div className="video-placeholder">
                 <img
-                  src="https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp"
-                  alt="Trại Gà Ba Anh Em"
+                  src="https://res.cloudinary.com/duklfdbqf/image/upload/v1794207357/Gemini_Generated_Image_of30onof30onof30_pqgmxe.webp"
+                  alt="Trại Gà Ba Anh Em - Xem Live Trực Tiếp"
                   className="cover-image"
                 />
                 <div className="play-button-overlay">
@@ -648,7 +648,7 @@ const ViewerPage = () => {
                     <img
                       src={
                         recording.thumbnailUrl ||
-                        "https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp"
+                        "https://res.cloudinary.com/duklfdbqf/image/upload/v1794207357/Gemini_Generated_Image_of30onof30onof30_pqgmxe.webp"
                       }
                       alt={recording.title}
                     />
@@ -904,6 +904,10 @@ const ViewerPage = () => {
             <div className="video-modal-player">
               <video
                 src={selectedVideo.videoUrl}
+                poster={
+                  selectedVideo.thumbnailUrl ||
+                  "https://res.cloudinary.com/duklfdbqf/image/upload/v1794207357/Gemini_Generated_Image_of30onof30onof30_pqgmxe.webp"
+                }
                 controls
                 autoPlay
                 playsInline
