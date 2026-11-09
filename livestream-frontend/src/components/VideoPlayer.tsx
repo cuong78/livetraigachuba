@@ -25,17 +25,19 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ hlsUrl }) => {
       const hls = new Hls({
         debug: false,
         enableWorker: true,
-        lowLatencyMode: false,
-        backBufferLength: 90,
-        maxBufferLength: 60,
-        maxMaxBufferLength: 120,
-        liveSyncDurationCount: 5,
-        liveMaxLatencyDurationCount: 15,
+        lowLatencyMode: true,
+        backBufferLength: 30,
+        maxBufferLength: 10,
+        maxMaxBufferLength: 20,
+        liveSyncDurationCount: 3,
+        liveMaxLatencyDurationCount: 8,
+        liveDurationInfinity: true,
+        highBufferWatchdogPeriod: 2,
         manifestLoadingTimeOut: 10000,
         manifestLoadingMaxRetry: 6,
         levelLoadingTimeOut: 10000,
         levelLoadingMaxRetry: 6,
-        fragLoadingTimeOut: 20000,
+        fragLoadingTimeOut: 15000,
         fragLoadingMaxRetry: 8,
       });
 
@@ -62,6 +64,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ hlsUrl }) => {
 
       hls.on(Hls.Events.ERROR, (_, data) => {
         console.error("HLS error:", data);
+        if (data.details === Hls.ErrorDetails.BUFFER_STALLED_ERROR) {
+          // Unstick buffer stall immediately
+          if (video && !video.paused && video.readyState >= 2) {
+            video.currentTime += 0.1;
+          }
+        }
         if (data.fatal) {
           switch (data.type) {
             case Hls.ErrorTypes.NETWORK_ERROR:
