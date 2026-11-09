@@ -63,7 +63,7 @@ function GioiThieuPage() {
           <h2>📍 Địa Chỉ</h2>
           <div className="address-box">
             <p>
-              <strong>Thôn Mỹ Xuân 2, xã Hoà Thịnh, Tây Hoà, Phú Yên (Daklak mới)</strong>
+              <strong>Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk</strong>
             </p>
             <p>
               📞 Hotline/Zalo: <a href="tel:0931607907">0931607907</a>

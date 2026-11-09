@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import VideoPlayer from "@/components/VideoPlayer";
 import ChatBox from "@/components/ChatBox";
 import LoginModal from "@/components/LoginModal";
@@ -29,6 +28,7 @@ const ViewerPage = () => {
     null
   );
   const [isMerging, setIsMerging] = useState(false);
+  const [copiedBank, setCopiedBank] = useState(false);
 
   useEffect(() => {
     // Check if admin already logged in AND token is still valid
@@ -151,8 +151,9 @@ const ViewerPage = () => {
   };
 
   const copyBankAccount = () => {
-    navigator.clipboard.writeText("050127110287");
-    alert("Đã sao chép !");
+    navigator.clipboard.writeText("0799478478");
+    setCopiedBank(true);
+    setTimeout(() => setCopiedBank(false), 2500);
   };
 
   const handleLoginSuccess = (token: string, user: any) => {
@@ -411,181 +412,161 @@ const ViewerPage = () => {
           </div>
         )}
 
-        {/* Contact Section */}
+        {/* Contact & Community Section */}
         <section className="contact-section">
-          <h2 className="section-title">Kết Nối Đam Mê</h2>
-          <div className="contact-card">
-            <div className="phone-display">
-              <a href="tel:0931607907" className="phone-number">
-                0931607907
-              </a>
-              <p className="contact-label">Hotline/Zalo liên hệ</p>
+          <div className="section-header-block">
+            <span className="section-kicker">KẾT NỐI & GIAO LƯU</span>
+            <h2 className="section-title-modern">Kết Nối Đam Mê</h2>
+            <p className="section-subtitle-modern">
+              Trại Gà Ba Anh Em — Sân chơi vần xổ, giao lưu chia sẻ đam mê gà đòn đỉnh cao
+            </p>
+          </div>
+
+          <div className="contact-grid-modern">
+            {/* Hotline / Zalo Direct Card */}
+            <div className="contact-highlight-card">
+              <div className="card-badge">HOTLINE TRỰC TIẾP 24/7</div>
+              <div className="phone-hero">
+                <a href="tel:0931607907" className="phone-number-modern">
+                  0931 607 907
+                </a>
+                <span className="phone-hint">Bấm để gọi điện hoặc kết bạn Zalo tư vấn</span>
+              </div>
+              <div className="cta-action-row">
+                <a href="tel:0931607907" className="btn-cta-primary">
+                  <span className="btn-icon">📞</span>
+                  <span>Gọi Ngay</span>
+                </a>
+                <a
+                  href="https://zalo.me/0931607907"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-cta-zalo"
+                >
+                  <span className="btn-icon">💬</span>
+                  <span>Nhắn Zalo</span>
+                </a>
+              </div>
             </div>
 
-            <div className="social-links">
+            {/* Community Channels Card */}
+            <div className="community-card-group">
               <a
                 href="https://zalo.me/0931607907"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="social-btn zalo-personal"
+                className="channel-tile channel-zalo"
               >
-                <img
-                  src="https://res.cloudinary.com/duklfdbqf/image/upload/v1765771851/zalo1_fwawgm.png"
-                  alt="AE KẾT BẠN ZALO"
-                  className="social-icon"
-                />
-              </a>
-
-              <a
-                href="https://zalo.me/0931607907"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-btn zalo-group"
-              >
-                <img
-                  src="https://res.cloudinary.com/duklfdbqf/image/upload/v1765771858/zalo-vip-1_yx9lgh.png"
-                  alt="NHÓM VIP ZALO"
-                  className="social-icon"
-                />
+                <div className="channel-icon-wrap">
+                  <span className="channel-icon">⚡</span>
+                </div>
+                <div className="channel-info">
+                  <h4>Nhóm Zalo VIP Tuyển Chọn</h4>
+                  <p>Xem trước video, hình ảnh & bảng giá chiến kê hàng ngày</p>
+                </div>
+                <span className="channel-arrow">→</span>
               </a>
 
               <a
                 href="https://www.facebook.com/tien.hangvan.5"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="social-btn facebook"
+                className="channel-tile channel-fb"
               >
-                <img
-                  src="https://res.cloudinary.com/duklfdbqf/image/upload/v1765771846/fb-1_xfr0sa.png"
-                  alt="AE KẾT BẠN FACEBOOK"
-                  className="social-icon"
-                />
+                <div className="channel-icon-wrap">
+                  <span className="channel-icon">📘</span>
+                </div>
+                <div className="channel-info">
+                  <h4>Facebook Trại Gà Ba Anh Em</h4>
+                  <p>Kết nối & giao lưu trực tiếp cùng chủ trại Trần Văn Thinh</p>
+                </div>
+                <span className="channel-arrow">→</span>
               </a>
-            </div>
 
-            {/* Google Map Section */}
-            {/* <div className="map-section">
-              <h3 className="map-title">📍 Vị Trí Trại Gà Ba Anh Em</h3>
-              <div className="address-display">
-                <p className="address-text">
-                  Địa chỉ: Thôn Mỹ Xuân 2, xã Hoà Thịnh, Tây Hoà, Phú Yên (Daklak mới)
-                </p>
+              <div className="channel-tile channel-location">
+                <div className="channel-icon-wrap">
+                  <span className="channel-icon">📍</span>
+                </div>
+                <div className="channel-info">
+                  <h4>Địa Chỉ Trại Gà</h4>
+                  <p>Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk</p>
+                </div>
               </div>
-              <div className="map-button-container">
-                <a
-                  href="https://maps.app.goo.gl/M9k5SzKYhaMf2T7v5"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="map-button"
-                  onClick={(e) => {
-                    // Try to open in Google Maps app on mobile
-                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                    if (isMobile) {
-                      // For Android: try Google Maps intent
-                      if (/Android/i.test(navigator.userAgent)) {
-                        const intentUrl = "https://maps.google.com/?q=Thôn+Giai+Sơn,+An+Mỹ,+Tuy+An,+Phú+Yên";
-                        window.location.href = intentUrl;
-                        e.preventDefault();
-                      }
-                      // For iOS: share.google link should work
-                    }
-                  }}
-                >
-                  <img
-                    src="https://res.cloudinary.com/duklfdbqf/image/upload/v1769398033/maps_ltwngc.png"
-                    alt="Mở bản đồ Google Maps"
-                    className="map-button-image"
-                  />
-                </a>
-              </div>
-            </div> */}
-
-            <div className="contact-links">
-              <Link to="/gioi-thieu" className="btn-contact-link">
-                ℹ️ Giới Thiệu
-              </Link>
-              <Link to="/lien-he" className="btn-contact-link">
-                📞 Liên Hệ
-              </Link>
             </div>
+          </div>
+
+          <div className="quick-nav-row">
+            <button onClick={() => setShowIntro(true)} className="btn-subnav-pill">
+              ℹ️ Giới Thiệu Về Trại
+            </button>
+            <button onClick={() => setShowRules(true)} className="btn-subnav-pill">
+              📋 Nội Quy Xổ Gà
+            </button>
           </div>
         </section>
 
-        {/* Branding Section - Thành Tích & Giải Thưởng
-        <section className="branding-section">
-          <h2 className="section-title">🏆 Thành Tích & Giải Thưởng</h2>
-          <div className="branding-container">
-            <img 
-              src="/thuonghieu.jpg" 
-              alt="Thành tích và giải thưởng Trại Gà Ba Anh Em"
-              className="branding-image"
-              loading="lazy"
-            />
-          </div>
-        </section> */}
-
-        {/* Bank Info Section */}
+        {/* Bank Info Section - Luxury Digital Bank Card */}
         <section className="bank-section">
-          <div className="bank-card">
-            <div className="bank-icon">💳</div>
-            <h3>Thông Tin Chuyển Khoản</h3>
-            <div className="bank-details">
-              <p>
-                <strong>Sacombank</strong>
-              </p>
-              <p>
-                Tên người nhận: <strong>Trần Thanh Phong</strong>
-              </p>
-              <p>
-                Số tài khoản: <strong>050127110287</strong>
-              </p>
-              <button className="btn-copy" onClick={copyBankAccount}>
-                📋 Sao chép STK
-              </button>
-            </div>
+          <div className="section-header-block">
+            <span className="section-kicker">GIAO DỊCH CHÍNH CHỦ</span>
+            <h2 className="section-title-modern">Thông Tin Chuyển Khoản</h2>
           </div>
-        </section>
 
-        {/* Rules Section */}
-        <section className="rules-section">
-          <div className="rules-card">
-            <div className="rules-icon">⚠️</div>
-            <h3>Quy định</h3>
-            <ul className="rules-list">
-              <li>
-                <span className="check-icon">☑️</span>
-                Xổ Gà Mua Bán Trên Tinh Thần Giao Lưu Vui Vẻ, Lịch Sự Trên Live
-                Chat
-              </li>
-              <li>
-                <span className="ban-icon">🚫</span>
-                Không Để Số Điện Thoại, Không Cá Cược Dưới Mọi Hình Thức
-              </li>
-            </ul>
-            <div className="rules-buttons">
-              <button
-                className="btn-chat"
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              >
-                💬 Chat Ngay
-              </button>
-              <Link to="/quy-dinh" className="btn-view-rules">
-                📋 Xem Đầy Đủ Quy Định
-              </Link>
+          <div className="bank-card-container">
+            <div className="vip-bank-card">
+              <div className="card-top-row">
+                <div className="bank-brand">
+                  <span className="mb-logo-badge">MB</span>
+                  <div className="bank-brand-text">
+                    <strong>MB BANK</strong>
+                    <span>NGÂN HÀNG QUÂN ĐỘI</span>
+                  </div>
+                </div>
+                <div className="card-chip-wrap">
+                  <span className="card-chip"></span>
+                  <span className="contactless-icon">📡</span>
+                </div>
+              </div>
+
+              <div className="card-number-row">
+                <span className="card-label">SỐ TÀI KHOẢN</span>
+                <div className="account-number-display">
+                  <span>0799</span>
+                  <span>478</span>
+                  <span>478</span>
+                </div>
+              </div>
+
+              <div className="card-bottom-row">
+                <div className="holder-block">
+                  <span className="card-label">CHỦ TÀI KHOẢN</span>
+                  <span className="holder-name">TRẦN VĂN THINH</span>
+                </div>
+                <button
+                  className={`btn-copy-account ${copiedBank ? "is-copied" : ""}`}
+                  onClick={copyBankAccount}
+                >
+                  {copiedBank ? "✅ Đã sao chép" : "📋 Sao chép STK"}
+                </button>
+              </div>
             </div>
+            <p className="bank-transfer-hint">
+              * Quý khách chuyển khoản vui lòng ghi rõ nội dung: <strong>[Họ tên] + [Số điện thoại]</strong> để được xác nhận nhanh nhất.
+            </p>
           </div>
         </section>
 
         {/* Video Archive Section */}
         <section className="video-archive">
-          <h2 className="section-title">
-            <span className="play-icon">▶️</span>
-            VIDEO XEM LẠI
-          </h2>
-          <p className="archive-desc">
-            Nơi lưu trữ các video vần xổ gà chọi được quay trực tiếp hàng ngày
-            18h tại Thôn Mỹ Xuân 2, xã Hoà Thịnh, Tây Hoà, Phú Yên (Daklak mới)
-          </p>
+          <div className="section-header-block">
+            <span className="section-kicker">KHO VIDEO TƯ LIỆU</span>
+            <h2 className="section-title-modern">
+              <span className="play-icon-glow">▶</span> Video Xem Lại
+            </h2>
+            <p className="section-subtitle-modern">
+              Nơi lưu trữ các video vần xổ gà chọi được quay trực tiếp hàng ngày lúc 18h tại Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk
+            </p>
+          </div>
 
           {/* Admin: Upload Video Button */}
           {isAdmin && (
@@ -596,72 +577,114 @@ const ViewerPage = () => {
                 title="Upload video hôm nay lên hệ thống"
                 disabled={isMerging}
               >
-                {isMerging ? "⏳ Đang xử lý..." : `📤 Upload Video Hôm Nay (${getCurrentDate()})`}
+                {isMerging ? "⏳ Đang xử lý video..." : `📤 Upload Video Hôm Nay (${getCurrentDate()})`}
               </button>
             </div>
           )}
 
-          <div className="video-grid">
+          <div className="video-grid-modern">
             {recordings.length > 0 ? (
               recordings.map((recording) => (
                 <div
                   key={recording.id}
-                  className="video-card"
+                  className="video-item-card"
                   onClick={() => setSelectedVideo(recording)}
-                  style={{ cursor: "pointer" }}
                 >
-                  <div className="video-thumbnail">
+                  <div className="video-thumb-wrap">
                     <img
                       src={
                         recording.thumbnailUrl ||
                         "https://res.cloudinary.com/duklfdbqf/image/upload/v1794207357/Gemini_Generated_Image_of30onof30onof30_pqgmxe.webp"
                       }
                       alt={recording.title}
+                      className="video-thumb-img"
+                      loading="lazy"
                     />
-                    <div className="play-overlay">▶️</div>
+                    <div className="video-thumb-scrim"></div>
+                    <div className="video-play-btn">
+                      <span className="play-tri">▶</span>
+                    </div>
                     {recording.durationSeconds > 0 && (
-                      <span className="video-duration">
+                      <span className="video-time-badge">
                         {formatDuration(recording.durationSeconds)}
                       </span>
                     )}
+                    <span className="video-cat-badge">XỔ GÀ XEM LẠI</span>
                   </div>
-                  <div className="video-info">
-                    <h4>{recording.title}</h4>
-                    <p className="video-date">
-                      {formatRecordingDate(recording.recordingDate)}
-                    </p>
-                    <span className="video-category">VIDEO XỔ GÀ XEM LẠI</span>
-                    {/* Admin: Delete button */}
+
+                  <div className="video-meta-block">
+                    <h4 className="video-item-title">{recording.title}</h4>
+                    <div className="video-date-row">
+                      <span className="date-icon">📅</span>
+                      <span>Ngày {formatRecordingDate(recording.recordingDate)}</span>
+                    </div>
                     {isAdmin && (
                       <button
-                        className="btn-delete-video"
+                        className="btn-delete-card-video"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDeleteRecording(recording.recordingDate);
                         }}
                         title="Xóa video này"
                       >
-                        🗑️ Xóa
+                        🗑️ Xóa video
                       </button>
                     )}
                   </div>
                 </div>
               ))
             ) : (
-              <div className="no-recordings">
-                <p>
-                  Chưa có video xem lại. Video sẽ được cập nhật sau mỗi buổi
-                  live.
+              <div className="video-empty-state">
+                <div className="empty-state-icon">🎬</div>
+                <h3 className="empty-state-title">Chưa có video phát lại hôm nay</h3>
+                <p className="empty-state-desc">
+                  Các buổi vần xổ gà được phát trực tiếp đều đặn vào lúc <strong>18:00 hàng ngày</strong>.
+                  Sau khi buổi live kết thúc, hệ thống sẽ tự động tổng hợp và hiển thị video phát lại tại đây.
                 </p>
+                <div className="empty-state-badge">
+                  <span className="live-pulse-dot"></span>
+                  <span>Lịch trực tiếp: 18h00 mỗi ngày</span>
+                </div>
               </div>
             )}
           </div>
 
-          <div className="archive-note">
+          <div className="live-reminder-banner">
+            <span className="reminder-icon">🔴</span>
             <p>
-              <strong>XEM LIVE HÔM NAY</strong> - Truy cập trực tiếp để xem vần
-              xổ gà diễn ra lúc 18h hàng ngày
+              <strong>XEM TRỰC TIẾP HÔM NAY:</strong> Truy cập website vào lúc <strong>18h00 hàng ngày</strong> để theo dõi các trận vần xổ gà chọi trực tiếp với chất lượng âm thanh và hình ảnh sắc nét nhất.
             </p>
+          </div>
+        </section>
+
+        {/* Rules Section */}
+        <section className="rules-section">
+          <div className="rules-card-modern">
+            <div className="rules-header">
+              <span className="rules-badge">NỘI QUY CỘNG ĐỒNG</span>
+              <h3>Cam Kết & Quy Định Sân Chơi</h3>
+            </div>
+            <div className="rules-grid-modern">
+              <div className="rule-box">
+                <div className="rule-icon-circle check">✓</div>
+                <div className="rule-text">
+                  <strong>Tinh thần giao lưu văn minh</strong>
+                  <p>Sân chơi kết nối anh em đam mê gà đòn trên cả nước, mua bán giao lưu lịch sự, tôn trọng lẫn nhau.</p>
+                </div>
+              </div>
+              <div className="rule-box">
+                <div className="rule-icon-circle ban">✕</div>
+                <div className="rule-text">
+                  <strong>Tuyệt đối không cá cược</strong>
+                  <p>Không để lại số điện thoại giao dịch lạ, nghiêm cấm mọi hình thức cá cược vi phạm pháp luật Việt Nam.</p>
+                </div>
+              </div>
+            </div>
+            <div className="rules-action-row">
+              <button onClick={() => setShowRules(true)} className="btn-rules-modal">
+                📋 Xem Đầy Đủ Nội Quy Xổ Gà
+              </button>
+            </div>
           </div>
         </section>
 
@@ -745,7 +768,7 @@ const ViewerPage = () => {
                   </li>
                 </ul>
                 <p className="disclaimer">
-                  <strong>Lưu ý pháp lý:</strong> Website CLB Gà Chọi Cao Đổi
+                  <strong>Lưu ý pháp lý:</strong> Website Trại Gà Ba Anh Em
                   hoạt động với hình thức giải trí, vui lòng không cá độ dưới
                   mọi hình thức vi phạm pháp luật Việt Nam.
                 </p>
@@ -755,81 +778,83 @@ const ViewerPage = () => {
         )}
       </div>
 
-      {/* Footer */}
+      {/* Luxury Footer */}
       <footer className="site-footer">
         <div className="container">
-          <div className="footer-grid">
-            <div className="footer-col">
-              <h3>Trại Gà Ba Anh Em</h3>
-              <ul>
-                <li>• Vần xổ gà trực tiếp 18h hàng ngày</li>
-                <li>• Giao lưu kết nối đam mê gà chọi</li>
-              </ul>
-              <h3>Chuyển Khoản</h3>
-              <p>🏦 Sacombank</p>
-              <p>
-                💳 STK: <strong>050127110287</strong>
+          <div className="footer-grid-modern">
+            <div className="footer-col-brand">
+              <div className="footer-brand-header">
+                <img
+                  src="https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp"
+                  alt="Trại Gà Ba Anh Em"
+                  className="footer-logo"
+                />
+                <div>
+                  <h3>Trại Gà Ba Anh Em</h3>
+                  <span className="footer-tagline">TINH HOA VIỆT</span>
+                </div>
+              </div>
+              <p className="footer-desc">
+                Nơi hội tụ đam mê gà chọi đỉnh cao. Chuyên vần xổ gà trực tiếp 18h hàng ngày, giao lưu chia sẻ kỹ thuật và con giống chất lượng.
               </p>
-              <p>👤Trần Thanh Phong</p>
             </div>
-            <div className="footer-col">
-              <h3>Liên Hệ</h3>
-              <h3>
-                <a href="tel:0931607907">📞 0931607907</a>
-              </h3>
-              <p>📍 Thôn Mỹ Xuân 2, xã Hoà Thịnh, Tây Hoà, Phú Yên (Daklak mới)</p>
-              <div className="social-links" style={{ marginTop: "15px" }}>
-                <a
-                  href="https://zalo.me/0931607907"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    color: "#0068FF",
-                    textDecoration: "none",
-                    marginRight: "15px",
-                  }}
-                >
-                  <img
-                    src="https://res.cloudinary.com/duklfdbqf/image/upload/v1764831133/c6f42954-ecb7-4458-bb73-9ecb6b835f8b_yt3vqs.jpg"
-                    alt="Zalo"
-                    style={{
-                      width: "25px",
-                      height: "25px",
-                      borderRadius: "50%",
-                      marginRight: "5px",
-                    }}
-                  />
-                  Zalo Ba Anh Em
-                </a>
-                <a
-                  href="https://www.facebook.com/tien.hangvan.5"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "#1877F2", textDecoration: "none" }}
-                >
-                  📘 Facebook
-                </a>
+
+            <div className="footer-col-bank">
+              <h4>Tài Khoản Giao Dịch</h4>
+              <div className="footer-bank-info">
+                <p className="bank-name-tag">🏦 MB Bank (Quân Đội)</p>
+                <p className="bank-stk-tag">
+                  STK: <strong>0799 478 478</strong>
+                </p>
+                <p className="bank-holder-tag">
+                  Chủ TK: <strong>TRẦN VĂN THINH</strong>
+                </p>
               </div>
             </div>
-            <div className="footer-col">
-              <h3>Quy Định</h3>
-              <ul>
+
+            <div className="footer-col-contact">
+              <h4>Thông Tin Liên Hệ</h4>
+              <ul className="footer-contact-list">
                 <li>
-                  • Website Trại Gà Ba Anh Em hoạt động với hình thức
-                  giải trí, vui lòng không cá độ dưới mọi hình thức vi phạm pháp
-                  luật Việt Nam
+                  <span className="contact-icon">📞</span>
+                  <a href="tel:0931607907" className="contact-link-highlight">
+                    Hotline: 0931 607 907
+                  </a>
                 </li>
                 <li>
-                  • Xổ Gà Mua Bán Trên Tinh Thần Giao Lưu Vui Vẻ, Lịch Sự trên
-                  Live Chat
+                  <span className="contact-icon">💬</span>
+                  <a
+                    href="https://zalo.me/0931607907"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Zalo: 0931 607 907
+                  </a>
+                </li>
+                <li>
+                  <span className="contact-icon">📘</span>
+                  <a
+                    href="https://www.facebook.com/tien.hangvan.5"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Facebook: Trần Văn Thinh
+                  </a>
+                </li>
+                <li>
+                  <span className="contact-icon">📍</span>
+                  <span>Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk</span>
+                </li>
+                <li>
+                  <span className="contact-icon">⏰</span>
+                  <span>Trực tiếp: 18:00 Hàng Ngày</span>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="footer-bottom">
-            <p>Bản quyền thuộc về Trại Gà Ba Anh Em © 2026</p>
+
+          <div className="footer-bottom-modern">
+            <p>© 2026 Trại Gà Ba Anh Em • traigabaanhem.com • All Rights Reserved</p>
           </div>
         </div>
       </footer>

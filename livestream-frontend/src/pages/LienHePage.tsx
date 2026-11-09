@@ -64,17 +64,9 @@ function LienHePage() {
             <div className="card-icon">📍</div>
             <h2>Địa Chỉ</h2>
             <p className="address-text">
-              <strong>Thôn Mỹ Xuân 2, xã Hoà Thịnh, Tây Hoà, Phú Yên (Daklak mới)</strong>
+              <strong>Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk</strong>
             </p>
             <p>Anh em có thể đến trực tiếp xem gà và giao lưu</p>
-            <a
-              href="https://maps.google.com/?q=Thôn+Giai+Sơn,+An+Mỹ,+Tuy+An,+Phú+Yên"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-contact btn-map"
-            >
-              🗺️ Xem Bản Đồ
-            </a>
           </div>
 
           <div className="contact-card schedule">
@@ -154,15 +146,15 @@ function LienHePage() {
           <div className="bank-card">
             <div className="bank-logo">🏦</div>
             <div className="bank-info">
-              <p className="bank-name">Sacombank</p>
-              <p className="account-number">050127110287</p>
-              <p className="account-holder">Trần Thanh Phong</p>
+              <p className="bank-name">MB Bank (Ngân Hàng Quân Đội)</p>
+              <p className="account-number">0799 478 478</p>
+              <p className="account-holder">Trần Văn Thinh</p>
             </div>
             <button
               className="btn-copy"
               onClick={() => {
-                navigator.clipboard.writeText("050127110287");
-                alert("Đã sao chép !");
+                navigator.clipboard.writeText("0799478478");
+                alert("Đã sao chép số tài khoản MB Bank: 0799 478 478!");
               }}
             >
               📋 Sao Chép STK
