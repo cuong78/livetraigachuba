@@ -52,7 +52,7 @@ function GioiThieuPage() {
           </p>
           <p>
             Trại Gà Ba Anh Em tổ chức{" "}
-            <strong>vần xổ gà trực tiếp lúc 18h hàng ngày</strong>, mang đến cho
+            <strong>vần xổ gà trực tiếp lúc 18h30 hàng ngày</strong>, mang đến cho
             anh em những trận đấu gay cấn, hấp dẫn với chất lượng hình ảnh HD.
             Đến với Trại Gà Ba Anh Em, bạn sẽ được trải nghiệm những trận đấu gà chọi
             chất lượng cao nhất.
@@ -77,7 +77,7 @@ function GioiThieuPage() {
             <div className="service-card">
               <div className="service-icon">📺</div>
               <h3>Livestream Xổ Gà</h3>
-              <p>Trực tiếp vần xổ gà 18h hàng ngày với chất lượng HD</p>
+              <p>Trực tiếp vần xổ gà 18h30 hàng ngày với chất lượng HD</p>
             </div>
             <div className="service-card">
               <div className="service-icon">🐔</div>

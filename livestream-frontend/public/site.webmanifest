@@ -1,7 +1,7 @@
 {
-  "name": "Trại Gà Ba Anh Em | Xổ Gà Trực Tiếp 18h Hàng Ngày",
+  "name": "Trại Gà Ba Anh Em | Xổ Gà Trực Tiếp 18h30 Hàng Ngày",
   "short_name": "Trại Gà Ba Anh Em",
-  "description": "Trại Gà Ba Anh Em, chuyên xổ gà trực tiếp 18h hàng ngày. Livestream vần xổ gà chọi chất lượng cao.",
+  "description": "Trại Gà Ba Anh Em, chuyên xổ gà trực tiếp 18h30 hàng ngày. Livestream vần xổ gà chọi chất lượng cao.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -79,7 +79,7 @@
     {
       "name": "Xem Live Stream",
       "short_name": "Live",
-      "description": "Xem xổ gà trực tiếp 18h",
+      "description": "Xem xổ gà trực tiếp 18h30",
       "url": "/live",
       "icons": [
         {

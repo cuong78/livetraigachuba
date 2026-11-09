@@ -564,7 +564,7 @@ const ViewerPage = () => {
               <span className="play-icon-glow">▶</span> Video Xem Lại
             </h2>
             <p className="section-subtitle-modern">
-              Nơi lưu trữ các video vần xổ gà chọi được quay trực tiếp hàng ngày lúc 18h tại Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk
+              Nơi lưu trữ các video vần xổ gà chọi được quay trực tiếp hàng ngày lúc 18h30 tại Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk
             </p>
           </div>
 
@@ -638,12 +638,12 @@ const ViewerPage = () => {
                 <div className="empty-state-icon">🎬</div>
                 <h3 className="empty-state-title">Chưa có video phát lại hôm nay</h3>
                 <p className="empty-state-desc">
-                  Các buổi vần xổ gà được phát trực tiếp đều đặn vào lúc <strong>18:00 hàng ngày</strong>.
+                  Các buổi vần xổ gà được phát trực tiếp đều đặn vào lúc <strong>18h30 hàng ngày</strong>.
                   Sau khi buổi live kết thúc, hệ thống sẽ tự động tổng hợp và hiển thị video phát lại tại đây.
                 </p>
                 <div className="empty-state-badge">
                   <span className="live-pulse-dot"></span>
-                  <span>Lịch trực tiếp: 18h00 mỗi ngày</span>
+                  <span>Lịch trực tiếp: 18h30 mỗi ngày</span>
                 </div>
               </div>
             )}
@@ -652,7 +652,7 @@ const ViewerPage = () => {
           <div className="live-reminder-banner">
             <span className="reminder-icon">🔴</span>
             <p>
-              <strong>XEM TRỰC TIẾP HÔM NAY:</strong> Truy cập website vào lúc <strong>18h00 hàng ngày</strong> để theo dõi các trận vần xổ gà chọi trực tiếp với chất lượng âm thanh và hình ảnh sắc nét nhất.
+              <strong>XEM TRỰC TIẾP HÔM NAY:</strong> Truy cập website vào lúc <strong>18h30 hàng ngày</strong> để theo dõi các trận vần xổ gà chọi trực tiếp với chất lượng âm thanh và hình ảnh sắc nét nhất.
             </p>
           </div>
         </section>
@@ -795,7 +795,7 @@ const ViewerPage = () => {
                 </div>
               </div>
               <p className="footer-desc">
-                Nơi hội tụ đam mê gà chọi đỉnh cao. Chuyên vần xổ gà trực tiếp 18h hàng ngày, giao lưu chia sẻ kỹ thuật và con giống chất lượng.
+                Nơi hội tụ đam mê gà chọi đỉnh cao. Chuyên vần xổ gà trực tiếp 18h30 hàng ngày, giao lưu chia sẻ kỹ thuật và con giống chất lượng.
               </p>
             </div>
 
@@ -847,7 +847,7 @@ const ViewerPage = () => {
                 </li>
                 <li>
                   <span className="contact-icon">⏰</span>
-                  <span>Trực tiếp: 18:00 Hàng Ngày</span>
+                  <span>Trực tiếp: 18h30 Hàng Ngày</span>
                 </li>
               </ul>
             </div>

@@ -155,10 +155,10 @@ function QuyDinhPage() {
           <h2>⏰ Lịch Livestream</h2>
           <div className="schedule-box">
             <div className="schedule-time">
-              <span className="time">18:00</span>
+              <span className="time">18h30</span>
               <span className="period">Hàng ngày</span>
             </div>
-            <p>Vần xổ gà trực tiếp mỗi ngày lúc 18h. Anh em nhớ theo dõi!</p>
+            <p>Vần xổ gà trực tiếp mỗi ngày lúc 18h30. Anh em nhớ theo dõi!</p>
           </div>
         </section>
 

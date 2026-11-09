@@ -73,7 +73,7 @@ function LienHePage() {
             <div className="card-icon">⏰</div>
             <h2>Lịch Livestream</h2>
             <div className="schedule-time">
-              <span className="time">18:00</span>
+              <span className="time">18h30</span>
               <span className="period">Hàng Ngày</span>
             </div>
             <p>Vần xổ gà trực tiếp mỗi ngày</p>
@@ -179,7 +179,7 @@ function LienHePage() {
             <div className="faq-item">
               <h3>Livestream lúc mấy giờ?</h3>
               <p>
-                Vần xổ gà trực tiếp lúc 18h hàng ngày. Anh em vào trang chủ để
+                Vần xổ gà trực tiếp lúc 18h30 hàng ngày. Anh em vào trang chủ để
                 xem.
               </p>
             </div>

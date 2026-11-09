@@ -105,7 +105,7 @@ function VideoPage() {
             <span className="live-dot"></span>
             <span>LIVE</span>
           </div>
-          <p>Xổ gà trực tiếp lúc 18h hàng ngày</p>
+          <p>Xổ gà trực tiếp lúc 18h30 hàng ngày</p>
           <Link to="/" className="btn-watch-live">
             Xem Trực Tiếp Ngay
           </Link>
