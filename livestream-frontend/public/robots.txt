@@ -1,0 +1,9 @@
+# robots.txt for gachoixombau.com
+# Gà Chọi Xóm Bầu - Xổ Gà Trực Tiếp
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://gachoixombau.com/sitemap.xml

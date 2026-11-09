@@ -1,0 +1,137 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: livestream-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - livestream-network
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: livestream-redis
+    volumes:
+      - redis_data:/data
+    networks:
+      - livestream-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  # RTMP Server (SRS - Simple Realtime Server) v6
+  srs:
+    image: ossrs/srs:6
+    container_name: livestream-srs
+    ports:
+      - "1935:1935" # RTMP
+    volumes:
+      - ./srs.conf:/usr/local/srs/conf/srs.conf
+      - srs_data:/usr/local/srs/objs/nginx/html
+      - recordings_data:/usr/local/srs/objs/nginx/html/recordings
+      - videos_data:/usr/local/srs/objs/nginx/html/videos
+    networks:
+      - livestream-network
+    command: ./objs/srs -c conf/srs.conf
+    restart: always
+
+  # Spring Boot Backend
+  backend:
+    build:
+      context: ./livestream-backend
+      dockerfile: Dockerfile
+    image: livestream-backend:local
+    container_name: livestream-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_REDIS_HOST: ${SPRING_REDIS_HOST}
+      SPRING_REDIS_PORT: ${SPRING_REDIS_PORT}
+      SPRING_REDIS_PASSWORD: ${SPRING_REDIS_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+      JWT_REFRESH_EXPIRATION: ${JWT_REFRESH_EXPIRATION}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      STREAM_RTMP_URL: ${STREAM_RTMP_URL}
+      STREAM_HLS_BASE_URL: ${STREAM_HLS_BASE_URL}
+      RECORDING_BASE_PATH: ${RECORDING_BASE_PATH}
+      RECORDING_OUTPUT_PATH: ${RECORDING_OUTPUT_PATH}
+      RECORDING_VIDEO_URL_BASE: ${RECORDING_VIDEO_URL_BASE}
+      RECORDING_THUMBNAIL_URL_BASE: ${RECORDING_THUMBNAIL_URL_BASE}
+      RECORDING_RETENTION_DAYS: ${RECORDING_RETENTION_DAYS}
+    volumes:
+      - recordings_data:/recordings
+      - videos_data:/videos
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - livestream-network
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/api/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 45s
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./livestream-frontend
+      dockerfile: Dockerfile
+    image: livestream-frontend:local
+    container_name: livestream-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - livestream-network
+    restart: always
+
+  # Nginx for HLS streaming and video playback
+  hls:
+    image: nginx:alpine
+    container_name: livestream-hls
+    ports:
+      - "8081:80"
+    volumes:
+      - srs_data:/usr/share/nginx/html
+      - videos_data:/usr/share/nginx/html/videos
+      - ./nginx-hls.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - livestream-network
+    restart: always
+
+volumes:
+  postgres_data:
+  redis_data:
+  srs_data:
+  recordings_data:
+  videos_data:
+
+networks:
+  livestream-network:
+    driver: bridge
