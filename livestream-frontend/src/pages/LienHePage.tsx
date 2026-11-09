@@ -46,12 +46,12 @@ function LienHePage() {
           <div className="contact-card hotline">
             <div className="card-icon">📞</div>
             <h2>Hotline / Zalo</h2>
-            <a href="tel:0354596261" className="phone-number">
-              0354596261
+            <a href="tel:0931607907" className="phone-number">
+              0931607907
             </a>
             <p>Gọi điện hoặc nhắn Zalo để được tư vấn nhanh nhất</p>
             <a
-              href="https://zalo.me/0354596261"
+              href="https://zalo.me/0931607907"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-contact btn-zalo"
@@ -96,7 +96,7 @@ function LienHePage() {
           <h2>🌐 Kết Nối Mạng Xã Hội</h2>
           <div className="social-grid">
             <a
-              href="https://zalo.me/0354596261"
+              href="https://zalo.me/0931607907"
               target="_blank"
               rel="noopener noreferrer"
               className="social-card zalo"
@@ -107,13 +107,13 @@ function LienHePage() {
                 className="social-icon"
               />
               <div className="social-info">
-                <h3>Zalo Cá Nhân</h3>
+                <h3>Zalo Ba Anh Em</h3>
                 <p>Kết bạn để giao lưu mua bán</p>
               </div>
             </a>
 
             <a
-              href="https://zalo.me/g/lcmzzxtmu89k5wxkvdag"
+              href="https://zalo.me/0931607907"
               target="_blank"
               rel="noopener noreferrer"
               className="social-card zalo-group"
@@ -124,13 +124,13 @@ function LienHePage() {
                 className="social-icon"
               />
               <div className="social-info">
-                <h3>Nhóm Zalo VIP</h3>
-                <p>Tham gia nhóm VIP tuyển gà chiến</p>
+                <h3>Zalo Trại Gà</h3>
+                <p>Liên hệ Zalo 0931607907 tuyển gà chiến</p>
               </div>
             </a>
 
             <a
-              href="https://www.facebook.com/ha.van.viet.584580"
+              href="https://www.facebook.com/tien.hangvan.5"
               target="_blank"
               rel="noopener noreferrer"
               className="social-card facebook"
@@ -141,7 +141,7 @@ function LienHePage() {
                 className="social-icon"
               />
               <div className="social-info">
-                <h3>Facebook Fanpage</h3>
+                <h3>Facebook Trại Gà</h3>
                 <p>Theo dõi để nhận thông báo mới</p>
               </div>
             </a>
@@ -180,7 +180,7 @@ function LienHePage() {
             <div className="faq-item">
               <h3>Làm sao để mua gà?</h3>
               <p>
-                Anh em liên hệ trực tiếp qua Zalo 0354596261 để được tư vấn và
+                Anh em liên hệ trực tiếp qua Zalo 0931607907 để được tư vấn và
                 xem gà. Hỗ trợ giao gà đi các tỉnh.
               </p>
             </div>
@@ -213,8 +213,8 @@ function LienHePage() {
           <h2>Liên Hệ Ngay Hôm Nay!</h2>
           <p>Chúng tôi luôn sẵn sàng hỗ trợ anh em</p>
           <div className="cta-buttons">
-            <a href="tel:0354596261" className="btn-call">
-              📞 Gọi Ngay: 0354596261
+            <a href="tel:0931607907" className="btn-call">
+              📞 Gọi Ngay: 0931607907
             </a>
           </div>
         </section>
@@ -226,7 +226,7 @@ function LienHePage() {
           © 2026 Trại Gà Ba Anh Em
         </p>
         <p>
-          Hotline/Zalo: <a href="tel:0354596261">0354596261</a>
+          Hotline/Zalo: <a href="tel:0931607907">0931607907</a>
         </p>
       </footer>
     </div>

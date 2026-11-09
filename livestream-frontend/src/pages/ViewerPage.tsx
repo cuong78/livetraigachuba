@@ -307,14 +307,14 @@ const ViewerPage = () => {
             <div className="header-actions">
               {isAdmin ? (
                 <div className="admin-info">
+                  <span className="admin-badge">👑 {adminUser?.username}</span>
                   <button
                     className="btn-blocked-ips"
                     onClick={() => setShowBlockedIpsModal(true)}
                     title="Quản lý IP đã chặn"
                   >
-                    🚫 IP đã chặn
+                    🚫 IP chặn
                   </button>
-                  <span className="admin-badge">👑 {adminUser?.username}</span>
                   <button className="btn-logout" onClick={handleLogout}>
                     Đăng xuất
                   </button>
@@ -324,15 +324,9 @@ const ViewerPage = () => {
                   className="btn-login"
                   onClick={() => setShowLoginModal(true)}
                 >
-                  🔐 Đăng nhập
+                  Đăng nhập
                 </button>
               )}
-              <button
-                className="menu-toggle"
-                onClick={() => setShowIntro(!showIntro)}
-              >
-                ☰
-              </button>
             </div>
           </div>
         </div>
@@ -351,35 +345,6 @@ const ViewerPage = () => {
       </nav>
 
       <div className="container">
-        {/* Live Stream Title */}
-        <div className="stream-header">
-          <h2 className="stream-title">
-            Xổ gà Server {activeServer} trực tiếp 18h ngày {getCurrentDate()}
-          </h2>
-
-          {/* Server Selection */}
-          <div className="server-selection">
-            <span className="server-label">Đổi Server:</span>
-            {["HD1", "HD2", "HD3", "HD4"].map((server) => (
-              <button
-                key={server}
-                className={`server-btn ${
-                  activeServer === server ? "active" : ""
-                }`}
-                onClick={() => setActiveServer(server)}
-              >
-                {server}
-              </button>
-            ))}
-            <a href="tel:0354596261" className="phone-btn">
-              📞
-            </a>
-          </div>
-          <p className="server-hint">
-            ⚠️ Nếu mạng lag hay chạy chậm bạn hãy chuyển đổi sang HD2, HD3, HD4
-          </p>
-        </div>
-
         {/* Main Content Grid */}
         <div className="main-content">
           {/* Video Player Section */}
@@ -420,7 +385,7 @@ const ViewerPage = () => {
             {/* Warning Banner */}
             <div className="warning-banner">
               <span className="warning-icon">⛔</span>
-              <strong>CẤM CÁ CƯỢC, CHỬI THỀ, KHOÁ NICK!</strong>
+              <span>CẤM CÁ CƯỢC, CHỬI THỀ</span>
             </div>
           </div>
 
@@ -450,15 +415,15 @@ const ViewerPage = () => {
           <h2 className="section-title">Kết Nối Đam Mê</h2>
           <div className="contact-card">
             <div className="phone-display">
-              <a href="tel:0354596261" className="phone-number">
-                0354596261
+              <a href="tel:0931607907" className="phone-number">
+                0931607907
               </a>
               <p className="contact-label">Hotline/Zalo liên hệ</p>
             </div>
 
             <div className="social-links">
               <a
-                href="https://zalo.me/0354596261"
+                href="https://zalo.me/0931607907"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-btn zalo-personal"
@@ -471,7 +436,7 @@ const ViewerPage = () => {
               </a>
 
               <a
-                href="https://zalo.me/g/lcmzzxtmu89k5wxkvdag"
+                href="https://zalo.me/0931607907"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-btn zalo-group"
@@ -484,7 +449,7 @@ const ViewerPage = () => {
               </a>
 
               <a
-                href="https://www.facebook.com/ha.van.viet.584580"
+                href="https://www.facebook.com/tien.hangvan.5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-btn facebook"
@@ -809,12 +774,12 @@ const ViewerPage = () => {
             <div className="footer-col">
               <h3>Liên Hệ</h3>
               <h3>
-                <a href="tel:0354596261">📞 0354596261</a>
+                <a href="tel:0931607907">📞 0931607907</a>
               </h3>
               <p>📍 Thôn Mỹ Xuân 2, xã Hoà Thịnh, Tây Hoà, Phú Yên (Daklak mới)</p>
               <div className="social-links" style={{ marginTop: "15px" }}>
                 <a
-                  href="https://zalo.me/g/lcmzzxtmu89k5wxkvdag"
+                  href="https://zalo.me/0931607907"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -835,10 +800,10 @@ const ViewerPage = () => {
                       marginRight: "5px",
                     }}
                   />
-                  Nhóm Zalo VIP
+                  Zalo Ba Anh Em
                 </a>
                 <a
-                  href="https://www.facebook.com/ha.van.viet.584580"
+                  href="https://www.facebook.com/tien.hangvan.5"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "#1877F2", textDecoration: "none" }}
@@ -932,7 +897,7 @@ const ViewerPage = () => {
 
       {/* Floating Action Buttons */}
       <div className="floating-buttons">
-        <a href="tel:0354596261" className="fab-btn fab-phone" title="Gọi Ngay">
+        <a href="tel:0931607907" className="fab-btn fab-phone" title="Gọi Ngay">
           <span className="fab-icon">
             <img
               src="https://res.cloudinary.com/duklfdbqf/image/upload/v1764553112/yellow-phone-icon-11_pypubp.png"
@@ -942,11 +907,11 @@ const ViewerPage = () => {
           <span className="fab-text">Gọi Ngay</span>
         </a>
         <a
-          href="https://zalo.me/0354596261"
+          href="https://zalo.me/0931607907"
           target="_blank"
           rel="noopener noreferrer"
           className="fab-btn fab-zalo"
-          title="Zalo VIP"
+          title="Zalo Trại Gà"
         >
           <span className="fab-icon">
             <img

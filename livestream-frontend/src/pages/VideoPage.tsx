@@ -207,7 +207,7 @@ function VideoPage() {
           <p>Theo dõi kênh để nhận thông báo mỗi khi có livestream mới</p>
           <div className="cta-buttons">
             <a
-              href="https://zalo.me/0354596261"
+              href="https://zalo.me/0931607907"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-zalo"
@@ -215,7 +215,7 @@ function VideoPage() {
               📱 Theo Dõi Zalo
             </a>
             <a
-              href="https://www.facebook.com/ha.van.viet.584580"
+              href="https://www.facebook.com/tien.hangvan.5"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-facebook"
@@ -232,7 +232,7 @@ function VideoPage() {
           © 2026 Trại Gà Ba Anh Em
         </p>
         <p>
-          Hotline/Zalo: <a href="tel:0354596261">0354596261</a>
+          Hotline/Zalo: <a href="tel:0931607907">0931607907</a>
         </p>
       </footer>
     </div>

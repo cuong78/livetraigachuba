@@ -78,30 +78,29 @@
   animation: fadeIn 0.5s ease;
 }
 
-.reload-btn {
-  font-size: 11px;
-  padding: 5px 10px;
-  background: #ffffff;
-  color: #dc143c;
+.btn-chot-ga {
+  font-size: 12px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+  color: #000000;
   border: none;
-  border-radius: 12px;
-  font-weight: bold;
+  border-radius: 14px;
+  font-weight: 800;
+  text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  display: flex;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(255, 140, 0, 0.45);
+  display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
+  letter-spacing: 0.5px;
 }
 
-.reload-btn:hover {
-  background: #ffd700;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.reload-btn:active {
-  transform: translateY(0);
+.btn-chot-ga:hover {
+  background: linear-gradient(135deg, #ffeb3b 0%, #ffa000 100%);
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 4px 14px rgba(255, 140, 0, 0.65);
+  color: #000000;
 }
 
 @keyframes fadeIn {
@@ -539,9 +538,10 @@
     gap: 4px;
   }
 
-  .reload-btn {
+  .btn-chot-ga {
     font-size: 11px;
-    padding: 6px 10px;
+    padding: 5px 12px;
+    gap: 4px;
   }
 
   .chatbox-messages {
@@ -630,10 +630,10 @@
     gap: 3px;
   }
 
-  .reload-btn {
-    font-size: 10px;
-    padding: 5px 8px;
-    gap: 4px;
+  .btn-chot-ga {
+    font-size: 11px;
+    padding: 4px 10px;
+    gap: 3px;
   }
 
   .chatbox-messages {

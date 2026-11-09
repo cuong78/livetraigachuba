@@ -314,21 +314,23 @@ const ChatBox: React.FC<ChatBoxProps> = ({
 
   return (
     <div className="chatbox-container">
-      {/* Header với nút Load lại trang và viewer count */}
+      {/* Header với nút Chốt gà và viewer count */}
       <div className="chatbox-header">
         <div className="header-left">
-          <a href="tel:0354596261" className="phone-link" title="Gọi ngay">
-            📞 0354596261
+          <a href="tel:0931607907" className="phone-link" title="Gọi ngay">
+            📞 0931607907
           </a>
           <span className="viewer-count">👁️ {viewerCount} đang xem</span>
         </div>
-        <button
-          className="reload-btn"
-          onClick={handleReloadPage}
-          title="Load lại trang"
+        <a
+          href="https://zalo.me/0931607907"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-chot-ga"
+          title="Chốt Gà qua Zalo"
         >
-          🔄 LOAD LẠI TRANG
-        </button>
+          🐓 CHỐT GÀ
+        </a>
       </div>
 
       {/* Form nhập liệu ở trên */}

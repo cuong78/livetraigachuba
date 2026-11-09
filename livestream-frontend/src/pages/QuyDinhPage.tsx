@@ -124,7 +124,7 @@ function QuyDinhPage() {
                 <h3>Liên hệ trực tiếp</h3>
                 <p>
                   Mọi giao dịch mua bán vui lòng liên hệ trực tiếp qua Zalo:
-                  0354596261
+                  0931607907
                 </p>
               </div>
             </div>
@@ -190,12 +190,12 @@ function QuyDinhPage() {
               ▶️ Xem Livestream Ngay
             </Link>
             <a
-              href="https://zalo.me/g/lcmzzxtmu89k5wxkvdag"
+              href="https://zalo.me/0931607907"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-zalo"
             >
-              📱 Tham Gia Nhóm Zalo VIP
+              📱 Liên Hệ Zalo Ngay
             </a>
           </div>
         </section>
@@ -207,7 +207,7 @@ function QuyDinhPage() {
           © 2026 Trại Gà Ba Anh Em
         </p>
         <p>
-          Hotline/Zalo: <a href="tel:0354596261">0354596261</a>
+          Hotline/Zalo: <a href="tel:0931607907">0931607907</a>
         </p>
       </footer>
     </div>
