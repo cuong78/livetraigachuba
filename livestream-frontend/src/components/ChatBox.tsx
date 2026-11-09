@@ -37,7 +37,6 @@ const ChatBox: React.FC<ChatBoxProps> = ({
     y: number;
   } | null>(null);
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const shouldScrollRef = useRef(true);
   const inputContentRef = useRef<HTMLInputElement>(null);
@@ -49,20 +48,19 @@ const ChatBox: React.FC<ChatBoxProps> = ({
     }
   }, []);
 
-  // Auto-scroll to bottom when new messages arrive (Twitch/YouTube style)
+  // Auto-scroll to top for newest message when input is at the top
   useEffect(() => {
     const container = messagesContainerRef.current;
     if (container && shouldScrollRef.current) {
-      container.scrollTop = container.scrollHeight;
+      container.scrollTop = 0;
     }
   }, [comments]);
 
   const handleScroll = () => {
     const container = messagesContainerRef.current;
     if (container) {
-      const isNearBottom =
-        container.scrollHeight - container.scrollTop - container.clientHeight < 60;
-      shouldScrollRef.current = isNearBottom;
+      const isNearTop = container.scrollTop < 50;
+      shouldScrollRef.current = isNearTop;
     }
   };
 
@@ -187,12 +185,11 @@ const ChatBox: React.FC<ChatBoxProps> = ({
 
       onSendComment(commentToSend);
 
-      // Force scroll to bottom for user's own sent message
+      // Force scroll to top so newest message shows immediately right below input dock
       shouldScrollRef.current = true;
       setTimeout(() => {
         if (messagesContainerRef.current) {
-          messagesContainerRef.current.scrollTop =
-            messagesContainerRef.current.scrollHeight;
+          messagesContainerRef.current.scrollTop = 0;
         }
       }, 50);
     } catch (error: any) {
@@ -202,8 +199,8 @@ const ChatBox: React.FC<ChatBoxProps> = ({
     }
   };
 
-  // Chronological stream (newest at bottom)
-  const displayedComments = comments.slice(-MAX_COMMENTS);
+  // Newest at top (directly below the input dock)
+  const displayedComments = comments.slice(-MAX_COMMENTS).reverse();
 
   // Render text with highlight mentions
   const renderContentWithMentions = (text: string) => {
@@ -264,58 +261,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({
         </a>
       </div>
 
-      {/* 2. Chat Message Stream (Inline Twitch/YouTube style - fits 8-12 messages) */}
-      <div
-        className="chatbox-messages"
-        ref={messagesContainerRef}
-        onScroll={handleScroll}
-      >
-        {displayedComments.length === 0 ? (
-          <div className="chatbox-empty">
-            <span className="empty-icon">💬</span>
-            <p>Chưa có bình luận nào. Hãy gửi bình luận đầu tiên!</p>
-          </div>
-        ) : (
-          displayedComments.map((comment, index) => {
-            const isAdminComment = comment.isAdmin === true;
-            return (
-              <div
-                key={
-                  comment.id ||
-                  `${comment.displayName}-${comment.createdAt || index}`
-                }
-                className={`chat-line ${isAdminComment ? "is-admin" : ""} ${
-                  comment.parentId ? "is-reply" : ""
-                }`}
-                onClick={(e) => handleCommentClick(comment, e)}
-              >
-                {isAdminComment && (
-                  <span className="badge-admin" title="Quản trị viên">
-                    👑 ADMIN
-                  </span>
-                )}
-                <span className="msg-author">{comment.displayName}:</span>{" "}
-                {comment.replyTo && (
-                  <span className="msg-reply-to">
-                    @{comment.replyTo}{" "}
-                  </span>
-                )}
-                <span className="msg-text">
-                  {renderContentWithMentions(comment.content)}
-                </span>
-                {isAdmin && comment.ipAddress && (
-                  <span className="badge-ip" title="IP người dùng">
-                    [{comment.ipAddress}]
-                  </span>
-                )}
-              </div>
-            );
-          })
-        )}
-        <div ref={messagesEndRef} />
-      </div>
-
-      {/* 3. Compact Single-Row Bottom Input Dock */}
+      {/* 2. Compact Single-Row Input Dock (Placed AT TOP for instant commenting while viewing video) */}
       <form onSubmit={handleSubmit} className="chat-dock">
         {replyingTo && (
           <div className="dock-reply-banner">
@@ -389,6 +335,56 @@ const ChatBox: React.FC<ChatBoxProps> = ({
           </button>
         </div>
       </form>
+
+      {/* 3. Chat Message Stream (Newest at top, directly under the input dock) */}
+      <div
+        className="chatbox-messages"
+        ref={messagesContainerRef}
+        onScroll={handleScroll}
+      >
+        {displayedComments.length === 0 ? (
+          <div className="chatbox-empty">
+            <span className="empty-icon">💬</span>
+            <p>Chưa có bình luận nào. Hãy gửi bình luận đầu tiên!</p>
+          </div>
+        ) : (
+          displayedComments.map((comment, index) => {
+            const isAdminComment = comment.isAdmin === true;
+            return (
+              <div
+                key={
+                  comment.id ||
+                  `${comment.displayName}-${comment.createdAt || index}`
+                }
+                className={`chat-line ${isAdminComment ? "is-admin" : ""} ${
+                  comment.parentId ? "is-reply" : ""
+                }`}
+                onClick={(e) => handleCommentClick(comment, e)}
+              >
+                {isAdminComment && (
+                  <span className="badge-admin" title="Quản trị viên">
+                    👑 ADMIN
+                  </span>
+                )}
+                <span className="msg-author">{comment.displayName}:</span>{" "}
+                {comment.replyTo && (
+                  <span className="msg-reply-to">
+                    @{comment.replyTo}{" "}
+                  </span>
+                )}
+                <span className="msg-text">
+                  {renderContentWithMentions(comment.content)}
+                </span>
+                {isAdmin && comment.ipAddress && (
+                  <span className="badge-ip" title="IP người dùng">
+                    [{comment.ipAddress}]
+                  </span>
+                )}
+              </div>
+            );
+          })
+        )}
+      </div>
 
       {/* 4. Admin Context Menu */}
       {contextMenu && isAdmin && (
