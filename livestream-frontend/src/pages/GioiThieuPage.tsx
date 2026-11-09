@@ -66,6 +66,27 @@ function GioiThieuPage() {
               <strong>Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk</strong>
             </p>
             <p>
+              <a
+                href="https://maps.app.goo.gl/8vTyBLXugZdLrFSP8"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  color: "#38bdf8",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  marginTop: "4px",
+                  marginBottom: "6px",
+                }}
+                title="Xem vị trí Trại Gà trên Google Maps"
+              >
+                🗺️ Xem Chỉ Đường Trên Google Maps →
+              </a>
+            </p>
+            <p>
               📞 Hotline/Zalo: <a href="tel:0931607907">0931607907</a>
             </p>
           </div>

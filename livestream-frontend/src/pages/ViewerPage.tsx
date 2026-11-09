@@ -483,15 +483,22 @@ const ViewerPage = () => {
                 <span className="channel-arrow">→</span>
               </a>
 
-              <div className="channel-tile channel-location">
+              <a
+                href="https://maps.app.goo.gl/8vTyBLXugZdLrFSP8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="channel-tile channel-location"
+                title="Bấm để xem vị trí & chỉ đường tới Trại Gà trên Google Maps"
+              >
                 <div className="channel-icon-wrap">
                   <span className="channel-icon">📍</span>
                 </div>
                 <div className="channel-info">
                   <h4>Địa Chỉ Trại Gà</h4>
-                  <p>Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk</p>
+                  <p>Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk (Mở Bản Đồ)</p>
                 </div>
-              </div>
+                <span className="channel-arrow">→</span>
+              </a>
             </div>
           </div>
 
@@ -843,7 +850,14 @@ const ViewerPage = () => {
                 </li>
                 <li>
                   <span className="contact-icon">📍</span>
-                  <span>Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk</span>
+                  <a
+                    href="https://maps.app.goo.gl/8vTyBLXugZdLrFSP8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Chỉ đường tới Trại Gà trên Google Maps"
+                  >
+                    Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk
+                  </a>
                 </li>
                 <li>
                   <span className="contact-icon">⏰</span>

@@ -67,6 +67,15 @@ function LienHePage() {
               <strong>Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk</strong>
             </p>
             <p>Anh em có thể đến trực tiếp xem gà và giao lưu</p>
+            <a
+              href="https://maps.app.goo.gl/8vTyBLXugZdLrFSP8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-contact btn-map"
+              title="Xem bản đồ và chỉ đường trên Google Maps"
+            >
+              🗺️ Chỉ Đường Google Maps
+            </a>
           </div>
 
           <div className="contact-card schedule">
