@@ -13,9 +13,9 @@ interface ChatBoxProps {
 }
 
 const DISPLAY_NAME_KEY = "livestream_display_name";
-const MAX_COMMENTS = 50; // Giới hạn tối đa 50 comments
-const MAX_DISPLAY_NAME_LENGTH = 50;
-const MAX_CONTENT_LENGTH = 500;
+const MAX_COMMENTS = 60;
+const MAX_DISPLAY_NAME_LENGTH = 30;
+const MAX_CONTENT_LENGTH = 300;
 
 const ChatBox: React.FC<ChatBoxProps> = ({
   comments,
@@ -36,54 +36,44 @@ const ChatBox: React.FC<ChatBoxProps> = ({
     x: number;
     y: number;
   } | null>(null);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const shouldScrollRef = useRef(true);
-
-  const handleReloadPage = () => {
-    window.location.reload();
-  };
+  const inputContentRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Load display name from localStorage
     const savedName = localStorage.getItem(DISPLAY_NAME_KEY);
     if (savedName) {
       setDisplayName(savedName);
     }
   }, []);
 
+  // Auto-scroll to bottom when new messages arrive (Twitch/YouTube style)
   useEffect(() => {
-    // Auto-scroll to top for new messages (since newest is at top)
     const container = messagesContainerRef.current;
     if (container && shouldScrollRef.current) {
-      const isNearTop = container.scrollTop < 100;
-
-      if (isNearTop) {
-        // Scroll to top to see newest messages
-        container.scrollTop = 0;
-      }
+      container.scrollTop = container.scrollHeight;
     }
   }, [comments]);
 
   const handleScroll = () => {
-    // Track if user scrolled away from top
     const container = messagesContainerRef.current;
     if (container) {
-      const isAtTop = container.scrollTop < 50;
-      shouldScrollRef.current = isAtTop;
+      const isNearBottom =
+        container.scrollHeight - container.scrollTop - container.clientHeight < 60;
+      shouldScrollRef.current = isNearBottom;
     }
   };
 
   useEffect(() => {
-    // Clear error after 5 seconds
     if (errorMessage) {
-      const timer = setTimeout(() => setErrorMessage(""), 5000);
+      const timer = setTimeout(() => setErrorMessage(""), 4000);
       return () => clearTimeout(timer);
     }
   }, [errorMessage]);
 
   useEffect(() => {
-    // Close context menu when clicking outside
     const handleClickOutside = () => setContextMenu(null);
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
@@ -94,23 +84,19 @@ const ChatBox: React.FC<ChatBoxProps> = ({
       e.preventDefault();
       e.stopPropagation();
 
-      // Calculate menu position to avoid overflow
-      const menuHeight = 250; // Estimated height of context menu
-      const menuWidth = 200;
+      const menuHeight = 220;
+      const menuWidth = 180;
       const viewportHeight = window.innerHeight;
       const viewportWidth = window.innerWidth;
 
       let x = e.clientX;
       let y = e.clientY;
 
-      // Adjust Y position if menu would overflow bottom
       if (y + menuHeight > viewportHeight) {
-        y = viewportHeight - menuHeight - 10; // 10px padding from bottom
+        y = viewportHeight - menuHeight - 10;
       }
-
-      // Adjust X position if menu would overflow right
       if (x + menuWidth > viewportWidth) {
-        x = viewportWidth - menuWidth - 10; // 10px padding from right
+        x = viewportWidth - menuWidth - 10;
       }
 
       setContextMenu({ comment, x, y });
@@ -146,8 +132,8 @@ const ChatBox: React.FC<ChatBoxProps> = ({
 
   const handleReplyClick = (comment: Comment) => {
     setReplyingTo(comment);
-    // Set content with @ mention
     setContent(`@${comment.displayName} `);
+    inputContentRef.current?.focus();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -156,132 +142,70 @@ const ChatBox: React.FC<ChatBoxProps> = ({
 
     setErrorMessage("");
 
-    if (!displayName.trim()) {
+    const cleanName = displayName.trim();
+    const cleanContent = content.trim();
+
+    if (!cleanName) {
       setErrorMessage("Vui lòng nhập tên hiển thị");
       return;
     }
 
-    if (displayName.length > MAX_DISPLAY_NAME_LENGTH) {
-      setErrorMessage(
-        `Tên hiển thị không được vượt quá ${MAX_DISPLAY_NAME_LENGTH} ký tự`
-      );
+    if (cleanName.length > MAX_DISPLAY_NAME_LENGTH) {
+      setErrorMessage(`Tên tối đa ${MAX_DISPLAY_NAME_LENGTH} ký tự`);
       return;
     }
 
-    if (!content.trim()) {
+    if (!cleanContent) {
       setErrorMessage("Vui lòng nhập nội dung bình luận");
       return;
     }
 
-    if (content.length > MAX_CONTENT_LENGTH) {
-      setErrorMessage(
-        `Nội dung không được vượt quá ${MAX_CONTENT_LENGTH} ký tự`
-      );
+    if (cleanContent.length > MAX_CONTENT_LENGTH) {
+      setErrorMessage(`Bình luận tối đa ${MAX_CONTENT_LENGTH} ký tự`);
       return;
     }
 
-    if (isSubmitting) {
-      return;
-    }
+    if (isSubmitting) return;
 
     try {
       setIsSubmitting(true);
-      localStorage.setItem(DISPLAY_NAME_KEY, displayName.trim());
+      localStorage.setItem(DISPLAY_NAME_KEY, cleanName);
 
-      // Lưu giá trị trước khi clear để tránh bug miss content
       const commentToSend: Comment = {
-        displayName: displayName.trim(),
-        content: content.trim(),
+        displayName: cleanName,
+        content: cleanContent,
         parentId: replyingTo?.id?.toString(),
         replyTo: replyingTo?.displayName,
       };
 
-      // Geolocation disabled - không yêu cầu quyền vị trí khi bình luận
-      // Đoạn code này đã được tắt để tránh làm phiền người dùng với popup xin quyền vị trí
-      // if (navigator.geolocation) {
-      //   try {
-      //     // Check permission first
-      //     if (navigator.permissions) {
-      //       const permissionStatus = await navigator.permissions.query({
-      //         name: "geolocation",
-      //       });
-      //       if (permissionStatus.state === "denied") {
-      //         console.warn("Geolocation permission denied by user");
-      //         // Continue without location
-      //       } else {
-      //         const position = await new Promise<GeolocationPosition>(
-      //           (resolve, reject) => {
-      //             navigator.geolocation.getCurrentPosition(resolve, reject, {
-      //               enableHighAccuracy: false,
-      //               timeout: 10000,
-      //               maximumAge: 300000, // Cache for 5 minutes
-      //             });
-      //           }
-      //         );
-      //         commentToSend.latitude = position.coords.latitude;
-      //         commentToSend.longitude = position.coords.longitude;
-      //         console.log(
-      //           "Location added to comment:",
-      //           position.coords.latitude,
-      //           position.coords.longitude
-      //         );
-      //       }
-      //     } else {
-      //       // Fallback for browsers without Permissions API
-      //       const position = await new Promise<GeolocationPosition>(
-      //         (resolve, reject) => {
-      //           navigator.geolocation.getCurrentPosition(resolve, reject, {
-      //             enableHighAccuracy: false,
-      //             timeout: 10000,
-      //             maximumAge: 300000,
-      //           });
-      //         }
-      //       );
-      //       commentToSend.latitude = position.coords.latitude;
-      //       commentToSend.longitude = position.coords.longitude;
-      //       console.log(
-      //         "Location added to comment:",
-      //         position.coords.latitude,
-      //         position.coords.longitude
-      //       );
-      //     }
-      //   } catch (geoError) {
-      //     console.warn("Failed to get location for comment:", geoError);
-      //     // Continue without location
-      //   }
-      // }
-
-      // Rule 1: Nếu đang đăng nhập với tư cách admin, gửi kèm adminUsername
-      // Backend sẽ verify adminUsername và set isAdmin = true
-      // displayName có thể là bất kỳ giá trị nào, không cần match với username
       if (isAdmin && adminUsername) {
         commentToSend.adminUsername = adminUsername;
       }
-      // Rule 2: Nếu không đăng nhập (isAdmin = false hoặc không có adminUsername)
-      // Không gửi adminUsername → Backend sẽ set isAdmin = false
-      // Dù displayName có giống admin username cũng không được CSS admin
 
-      // Clear form trước
       setContent("");
       setReplyingTo(null);
 
-      // Sau đó mới gửi comment (với giá trị đã lưu)
       onSendComment(commentToSend);
+
+      // Force scroll to bottom for user's own sent message
+      shouldScrollRef.current = true;
+      setTimeout(() => {
+        if (messagesContainerRef.current) {
+          messagesContainerRef.current.scrollTop =
+            messagesContainerRef.current.scrollHeight;
+        }
+      }, 50);
     } catch (error: any) {
-      if (error.message) {
-        setErrorMessage(error.message);
-      } else {
-        setErrorMessage("Không thể gửi bình luận. Vui lòng thử lại.");
-      }
+      setErrorMessage(error.message || "Không thể gửi bình luận. Thử lại.");
     } finally {
-      setTimeout(() => setIsSubmitting(false), 3000);
+      setTimeout(() => setIsSubmitting(false), 1200);
     }
   };
 
-  // Only show last 50 comments and reverse to show newest first
-  const displayedComments = comments.slice(-MAX_COMMENTS).reverse();
+  // Chronological stream (newest at bottom)
+  const displayedComments = comments.slice(-MAX_COMMENTS);
 
-  // Function to render content with highlighted mentions
+  // Render text with highlight mentions
   const renderContentWithMentions = (text: string) => {
     const mentionRegex = /@(\S+)/g;
     const parts = [];
@@ -289,13 +213,11 @@ const ChatBox: React.FC<ChatBoxProps> = ({
     let match;
 
     while ((match = mentionRegex.exec(text)) !== null) {
-      // Add text before mention
       if (match.index > lastIndex) {
         parts.push(
           <span key={lastIndex}>{text.substring(lastIndex, match.index)}</span>
         );
       }
-      // Add highlighted mention
       parts.push(
         <span key={match.index} className="mention-highlight">
           @{match[1]}
@@ -304,7 +226,6 @@ const ChatBox: React.FC<ChatBoxProps> = ({
       lastIndex = match.index + match[0].length;
     }
 
-    // Add remaining text
     if (lastIndex < text.length) {
       parts.push(<span key={lastIndex}>{text.substring(lastIndex)}</span>);
     }
@@ -314,92 +235,36 @@ const ChatBox: React.FC<ChatBoxProps> = ({
 
   return (
     <div className="chatbox-container">
-      {/* Header với nút Chốt gà và viewer count */}
+      {/* 1. Sleek Top Bar */}
       <div className="chatbox-header">
         <div className="header-left">
-          <a href="tel:0931607907" className="phone-link" title="Gọi ngay">
-            📞 0931607907
+          <a
+            href="https://zalo.me/0931607907"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="phone-pill"
+            title="Hotline / Zalo: 0931607907"
+          >
+            <span className="phone-icon">📞</span>
+            <span className="phone-num">0931607907</span>
           </a>
-          <span className="viewer-count">👁️ {viewerCount} đang xem</span>
+          <div className="viewer-pill">
+            <span className="live-dot"></span>
+            <span>{viewerCount} đang xem</span>
+          </div>
         </div>
         <a
           href="https://zalo.me/0931607907"
           target="_blank"
           rel="noopener noreferrer"
           className="btn-chot-ga"
-          title="Chốt Gà qua Zalo"
+          title="Chốt Gà nhanh qua Zalo"
         >
           🐓 CHỐT GÀ
         </a>
       </div>
 
-      {/* Form nhập liệu ở trên */}
-      <form onSubmit={handleSubmit} className="chatbox-form">
-        {errorMessage && (
-          <div className="chatbox-error">
-            <span className="error-icon">⚠️</span>
-            <span>{errorMessage}</span>
-          </div>
-        )}
-
-        {replyingTo && (
-          <div className="replying-to-banner">
-            <span>
-              ↩️ Đang trả lời <strong>@{replyingTo.displayName}</strong>
-            </span>
-            <button
-              type="button"
-              className="cancel-reply-btn"
-              onClick={() => {
-                setReplyingTo(null);
-                setContent("");
-              }}
-            >
-              ✕
-            </button>
-          </div>
-        )}
-
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="👤 Tên hiển thị"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-            className="chat-input"
-            maxLength={MAX_DISPLAY_NAME_LENGTH}
-            disabled={isSubmitting}
-          />
-          <small className="input-hint">
-            {displayName.length}/{MAX_DISPLAY_NAME_LENGTH}
-          </small>
-        </div>
-
-        <div className="form-group input-with-button">
-          <input
-            type="text"
-            placeholder="💬 Nhập bình luận..."
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="chat-input"
-            maxLength={MAX_CONTENT_LENGTH}
-            disabled={isSubmitting}
-          />
-          <button
-            type="submit"
-            className="chat-send-btn"
-            disabled={isSubmitting}
-          >
-            <span>{isSubmitting ? "Đợi..." : "Gửi"}</span>
-            <span className="send-icon">➤</span>
-          </button>
-        </div>
-        <small className="input-hint">
-          {content.length}/{MAX_CONTENT_LENGTH}
-        </small>
-      </form>
-
-      {/* Phần chat scroll ở dưới */}
+      {/* 2. Chat Message Stream (Inline Twitch/YouTube style - fits 8-12 messages) */}
       <div
         className="chatbox-messages"
         ref={messagesContainerRef}
@@ -407,54 +272,42 @@ const ChatBox: React.FC<ChatBoxProps> = ({
       >
         {displayedComments.length === 0 ? (
           <div className="chatbox-empty">
-            <span className="empty-icon">💭</span>
-            <p>Chưa có bình luận nào. Hãy là người đầu tiên!</p>
+            <span className="empty-icon">💬</span>
+            <p>Chưa có bình luận nào. Hãy gửi bình luận đầu tiên!</p>
           </div>
         ) : (
           displayedComments.map((comment, index) => {
             const isAdminComment = comment.isAdmin === true;
             return (
               <div
-                key={comment.id || `${comment.displayName}-${index}`}
-                className={`chat-message ${
+                key={
+                  comment.id ||
+                  `${comment.displayName}-${comment.createdAt || index}`
+                }
+                className={`chat-line ${isAdminComment ? "is-admin" : ""} ${
                   comment.parentId ? "is-reply" : ""
-                } ${isAdminComment ? "is-admin" : ""}`}
+                }`}
                 onClick={(e) => handleCommentClick(comment, e)}
-                style={{ cursor: "pointer" }}
               >
-                <div className="message-avatar">
-                  {isAdminComment
-                    ? "👑"
-                    : comment.displayName.charAt(0).toUpperCase()}
-                </div>
-                <div className="message-content-wrapper">
-                  <div className="message-header">
-                    <div className="message-name">{comment.displayName}</div>
-                    {isAdmin && comment.ipAddress && (
-                      <span className="admin-ip-badge" title="IP Address">
-                        🌐 {comment.ipAddress}
-                      </span>
-                    )}
-                    {isAdmin && comment.city && (
-                      <span
-                        className="admin-location-badge"
-                        title={comment.address || "Location"}
-                      >
-                        📍 {comment.city}
-                      </span>
-                    )}
-                  </div>
-                  {comment.replyTo && comment.parentId && (
-                    <div className="reply-quote-container">
-                      <div className="reply-quote-header">
-                        ↩️ Trả lời <strong>@{comment.replyTo}</strong>
-                      </div>
-                    </div>
-                  )}
-                  <div className="message-text">
-                    {renderContentWithMentions(comment.content)}
-                  </div>
-                </div>
+                {isAdminComment && (
+                  <span className="badge-admin" title="Quản trị viên">
+                    👑 ADMIN
+                  </span>
+                )}
+                <span className="msg-author">{comment.displayName}:</span>{" "}
+                {comment.replyTo && (
+                  <span className="msg-reply-to">
+                    @{comment.replyTo}{" "}
+                  </span>
+                )}
+                <span className="msg-text">
+                  {renderContentWithMentions(comment.content)}
+                </span>
+                {isAdmin && comment.ipAddress && (
+                  <span className="badge-ip" title="IP người dùng">
+                    [{comment.ipAddress}]
+                  </span>
+                )}
               </div>
             );
           })
@@ -462,7 +315,82 @@ const ChatBox: React.FC<ChatBoxProps> = ({
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Admin Context Menu */}
+      {/* 3. Compact Single-Row Bottom Input Dock */}
+      <form onSubmit={handleSubmit} className="chat-dock">
+        {replyingTo && (
+          <div className="dock-reply-banner">
+            <span className="reply-info">
+              ↩️ Trả lời <strong>@{replyingTo.displayName}</strong>
+            </span>
+            <button
+              type="button"
+              className="dock-reply-close"
+              onClick={() => {
+                setReplyingTo(null);
+                setContent("");
+              }}
+              title="Hủy trả lời"
+            >
+              ✕
+            </button>
+          </div>
+        )}
+
+        {errorMessage && (
+          <div className="dock-error-banner">
+            <span>⚠️ {errorMessage}</span>
+          </div>
+        )}
+
+        <div className="dock-row">
+          <input
+            type="text"
+            placeholder="👤 Tên"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            className="dock-input-name"
+            maxLength={MAX_DISPLAY_NAME_LENGTH}
+            disabled={isSubmitting}
+            title="Tên hiển thị của bạn"
+          />
+          <input
+            ref={inputContentRef}
+            type="text"
+            placeholder="Nhập bình luận..."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className="dock-input-msg"
+            maxLength={MAX_CONTENT_LENGTH}
+            disabled={isSubmitting}
+          />
+          <button
+            type="submit"
+            className="dock-btn-send"
+            disabled={isSubmitting || !content.trim()}
+            title="Gửi bình luận"
+          >
+            {isSubmitting ? (
+              <span className="dock-spinner"></span>
+            ) : (
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            )}
+          </button>
+        </div>
+      </form>
+
+      {/* 4. Admin Context Menu */}
       {contextMenu && isAdmin && (
         <div
           className="admin-context-menu"

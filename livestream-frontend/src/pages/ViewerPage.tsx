@@ -16,7 +16,6 @@ const ViewerPage = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeServer, setActiveServer] = useState("HD1");
   const [showIntro, setShowIntro] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -293,18 +292,20 @@ const ViewerPage = () => {
       <header className="site-header">
         <div className="container">
           <div className="header-content">
-            <div className="logo-section">
+            <div className="header-left">
               <img
                 src="https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp"
                 alt="Trại Gà Ba Anh Em"
                 className="logo"
               />
-              <div className="site-title">
-                <h1>Trại Gà Ba Anh Em</h1>
-                <p className="subtitle">Tinh Hoa Việt</p>
-              </div>
             </div>
-            <div className="header-actions">
+
+            <div className="site-title">
+              <h1>Trại Gà Ba Anh Em</h1>
+              <p className="subtitle">Tinh Hoa Việt</p>
+            </div>
+
+            <div className="header-right">
               {isAdmin ? (
                 <div className="admin-info">
                   <span className="admin-badge">👑 {adminUser?.username}</span>
@@ -313,10 +314,10 @@ const ViewerPage = () => {
                     onClick={() => setShowBlockedIpsModal(true)}
                     title="Quản lý IP đã chặn"
                   >
-                    🚫 IP chặn
+                    🚫 IP
                   </button>
                   <button className="btn-logout" onClick={handleLogout}>
-                    Đăng xuất
+                    Thoát
                   </button>
                 </div>
               ) : (
