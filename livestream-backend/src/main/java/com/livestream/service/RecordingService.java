@@ -184,9 +184,15 @@ public class RecordingService {
                 }
             }
             if (existing.getStatus() == DailyRecordingStatus.READY && existing.getVideoUrl() != null) {
-                log.warn("Video already merged for date: {}, skipping", date);
-                mergingDates.remove(date);
-                return;
+                List<Recording> readyRecordings = recordingRepository
+                        .findByRecordingDateAndStatusOrderBySegmentOrderAsc(date, RecordingStatus.READY);
+                if (readyRecordings.isEmpty()) {
+                    log.info("Video already merged for date: {} and no new ready segments. Skipping.", date);
+                    mergingDates.remove(date);
+                    return;
+                }
+                log.info("Date {} already has a merged video, but found {} new ready segments to append.",
+                        date, readyRecordings.size());
             }
         }
         
@@ -247,20 +253,47 @@ public class RecordingService {
             String outputFileName = date.toString() + ".mp4";
             String outputFilePath = outputPath + "/daily/" + outputFileName;
             String backupFilePath = outputPath + "/daily/" + date.toString() + ".mp4.bak";
+            String existingFlvPath = outputPath + "/daily/temp_existing_" + date.toString() + ".flv";
             
             // Ensure output directories exist
             Files.createDirectories(Paths.get(outputPath + "/daily"));
             Files.createDirectories(Paths.get(outputPath + "/thumbnails"));
             
-            // Backup existing file if it exists
+            // Backup existing file if it exists and remux to FLV for seamless concat
             Path outputFile = Paths.get(outputFilePath);
-            if (Files.exists(outputFile)) {
+            boolean hasExistingVideo = Files.exists(outputFile) && Files.size(outputFile) > 0;
+            if (hasExistingVideo) {
                 Files.copy(outputFile, Paths.get(backupFilePath), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
                 log.info("Backed up existing video to: {}", backupFilePath);
+
+                try {
+                    ProcessBuilder remuxPb = new ProcessBuilder(
+                            "ffmpeg", "-y",
+                            "-i", outputFilePath,
+                            "-c", "copy",
+                            existingFlvPath
+                    );
+                    remuxPb.redirectErrorStream(true);
+                    Process remuxProcess = remuxPb.start();
+                    int remuxExit = remuxProcess.waitFor();
+                    if (remuxExit != 0) {
+                        log.warn("Remuxing existing video to FLV exited with code {}", remuxExit);
+                        Files.deleteIfExists(Paths.get(existingFlvPath));
+                    } else {
+                        log.info("Successfully converted existing video to temp FLV: {}", existingFlvPath);
+                    }
+                } catch (Exception ex) {
+                    log.warn("Error remuxing existing video to FLV, will proceed with new segments only", ex);
+                    Files.deleteIfExists(Paths.get(existingFlvPath));
+                }
             }
             
-            // Merge recordings using FFmpeg
-            boolean mergeSuccess = mergeWithFFmpeg(recordings, outputFilePath);
+            // Merge recordings using FFmpeg (prepends existing video if present)
+            boolean mergeSuccess = mergeWithFFmpeg(recordings, outputFilePath,
+                    Files.exists(Paths.get(existingFlvPath)) ? existingFlvPath : null);
+            
+            // Clean up temporary FLV
+            Files.deleteIfExists(Paths.get(existingFlvPath));
             
             if (mergeSuccess) {
                 // Validate merged video
@@ -273,7 +306,7 @@ public class RecordingService {
                         log.info("Restored backup video after validation failure");
                     }
                     
-                    dailyRecording.setStatus(DailyRecordingStatus.FAILED);
+                    dailyRecording.setStatus(hasExistingVideo ? DailyRecordingStatus.READY : DailyRecordingStatus.FAILED);
                     dailyRecordingRepository.save(dailyRecording);
                     return false;
                 }
@@ -284,13 +317,15 @@ public class RecordingService {
                 long duration = getVideoDuration(outputFilePath);
                 long fileSize = Files.size(Paths.get(outputFilePath));
                 
+                int previousCount = dailyRecording.getSegmentCount() != null ? dailyRecording.getSegmentCount() : 0;
+                
                 // Update daily recording
                 dailyRecording.setFilePath(outputFilePath);
                 dailyRecording.setVideoUrl(videoUrlBase + "/daily/" + outputFileName);
                 dailyRecording.setThumbnailUrl(thumbnailUrl);
                 dailyRecording.setDurationSeconds(duration);
                 dailyRecording.setFileSizeBytes(fileSize);
-                dailyRecording.setSegmentCount(recordings.size());
+                dailyRecording.setSegmentCount(previousCount + recordings.size());
                 dailyRecording.setStatus(DailyRecordingStatus.READY);
                 dailyRecordingRepository.save(dailyRecording);
                 
@@ -317,11 +352,16 @@ public class RecordingService {
                 Files.deleteIfExists(Paths.get(backupFilePath));
                 log.info("Deleted backup file after successful merge");
                 
-                log.info("Successfully merged {} recordings for date: {}, output: {}", 
-                        recordings.size(), date, outputFilePath);
+                log.info("Successfully merged {} recordings for date: {}, total duration: {}s, output: {}", 
+                        recordings.size(), date, duration, outputFilePath);
                 return true;
             } else {
-                dailyRecording.setStatus(DailyRecordingStatus.FAILED);
+                if (hasExistingVideo && Files.exists(Paths.get(backupFilePath))) {
+                    Files.copy(Paths.get(backupFilePath), outputFile, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                    dailyRecording.setStatus(DailyRecordingStatus.READY);
+                } else {
+                    dailyRecording.setStatus(DailyRecordingStatus.FAILED);
+                }
                 dailyRecordingRepository.save(dailyRecording);
                 log.error("Failed to merge recordings for date: {}", date);
                 return false;
@@ -440,10 +480,20 @@ public class RecordingService {
      * DTS/PTS discontinuities between segments.
      */
     private boolean mergeWithFFmpeg(List<Recording> recordings, String outputPath) {
+        return mergeWithFFmpeg(recordings, outputPath, null);
+    }
+
+    private boolean mergeWithFFmpeg(List<Recording> recordings, String outputPath, String prependedFlvPath) {
         try {
             // Build the concat list file
             Path listFile = Files.createTempFile("ffmpeg_list_", ".txt");
             StringBuilder content = new StringBuilder();
+
+            // If an existing video was remuxed to FLV, prepend it as the first segment
+            if (prependedFlvPath != null && Files.exists(Paths.get(prependedFlvPath))) {
+                content.append("file '").append(prependedFlvPath).append("'\n");
+                log.info("Prepended existing video FLV to concat list: {}", prependedFlvPath);
+            }
 
             for (Recording r : recordings) {
                 // Convert SRS relative path → container absolute path

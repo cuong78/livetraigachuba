@@ -818,16 +818,14 @@ body {
   gap: 10px;
 }
 
-.mb-logo-badge {
-  background: linear-gradient(135deg, #0045aa 0%, #002875 100%);
-  color: #ffffff;
-  font-weight: 900;
-  font-size: 14px;
-  letter-spacing: 1px;
-  padding: 6px 10px;
+.vietin-card-logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 3px 8px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 69, 170, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .bank-brand-text {
@@ -1550,8 +1548,23 @@ body {
   gap: 6px;
 }
 
+.bank-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bank-logo-img {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
 .bank-name-tag {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: #38bdf8;
   margin: 0;

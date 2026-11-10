@@ -153,9 +153,15 @@ function LienHePage() {
         <section className="bank-section">
           <h2>💳 Thông Tin Chuyển Khoản</h2>
           <div className="bank-card">
-            <div className="bank-logo">🏦</div>
+            <div className="bank-logo">
+              <img
+                src="https://res.cloudinary.com/duklfdbqf/image/upload/v1794298077/Logo-VietinBank-CTG-Ori_pbtmat.webp"
+                alt="VietinBank"
+                style={{ height: "36px", objectFit: "contain", background: "#fff", padding: "4px 8px", borderRadius: "6px" }}
+              />
+            </div>
             <div className="bank-info">
-              <p className="bank-name">MB Bank (Ngân Hàng Quân Đội)</p>
+              <p className="bank-name">VietinBank (Ngân Hàng Công Thương)</p>
               <p className="account-number">0799 478 478</p>
               <p className="account-holder">Trần Văn Thinh</p>
             </div>
@@ -163,7 +169,7 @@ function LienHePage() {
               className="btn-copy"
               onClick={() => {
                 navigator.clipboard.writeText("0799478478");
-                alert("Đã sao chép số tài khoản MB Bank: 0799 478 478!");
+                alert("Đã sao chép số tài khoản VietinBank: 0799 478 478!");
               }}
             >
               📋 Sao Chép STK

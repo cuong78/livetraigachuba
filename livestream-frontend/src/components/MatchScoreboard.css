@@ -1,18 +1,21 @@
 .match-scoreboard {
   position: absolute;
-  bottom: 70px; /* Nằm trên warning banner (khoảng 50-60px chiều cao) */
+  bottom: 30px; /* Sát mép đáy video, nằm ngay trên dải cấm cá cược */
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(4px);
-  padding: 8px 16px;
-  border-radius: 8px;
-  animation: slideInBottom 0.4s ease-out;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  animation: slideInBottom 0.3s ease-out;
   /* Responsive sizing based on viewport */
-  font-size: clamp(10px, 1.2vw, 16px);
-  min-width: 280px;
-  max-width: 90%;
+  font-size: clamp(10px, 1.2vw, 15px);
+  min-width: 260px;
+  max-width: 95%;
+  pointer-events: none; /* Không che tương tác video */
 }
 
 @keyframes slideInBottom {
@@ -141,9 +144,9 @@
 /* Responsive design - Scale based on video container */
 @media (max-width: 768px) {
   .match-scoreboard {
-    bottom: 65px; /* Nằm trên warning banner trên tablet */
-    padding: 6px 12px;
-    min-width: 240px;
+    bottom: 30px; /* Sát mép đáy video, nằm ngay trên dải cấm cá cược */
+    padding: 5px 10px;
+    min-width: 220px;
   }
 
   .scoreboard-content {
@@ -161,10 +164,10 @@
 
 @media (max-width: 480px) {
   .match-scoreboard {
-    bottom: 60px; /* Nằm trên warning banner trên mobile */
-    padding: 5px 10px;
-    min-width: 200px;
-    max-width: 95%;
+    bottom: 28px; /* Sát đáy video trên điện thoại di động */
+    padding: 4px 8px;
+    min-width: 190px;
+    max-width: 96%;
   }
 
   .scoreboard-content {

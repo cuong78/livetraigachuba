@@ -499,10 +499,14 @@ const ViewerPage = () => {
             <div className="vip-bank-card">
               <div className="card-top-row">
                 <div className="bank-brand">
-                  <span className="mb-logo-badge">MB</span>
+                  <img
+                    src="https://res.cloudinary.com/duklfdbqf/image/upload/v1794298077/Logo-VietinBank-CTG-Ori_pbtmat.webp"
+                    alt="VietinBank"
+                    className="vietin-card-logo"
+                  />
                   <div className="bank-brand-text">
-                    <strong>MB BANK</strong>
-                    <span>NGÂN HÀNG QUÂN ĐỘI</span>
+                    <strong>VIETINBANK</strong>
+                    <span>NGÂN HÀNG CÔNG THƯƠNG</span>
                   </div>
                 </div>
                 <div className="card-chip-wrap">
@@ -547,7 +551,7 @@ const ViewerPage = () => {
               <span className="play-icon-glow">▶</span> Video Xem Lại
             </h2>
             <p className="section-subtitle-modern">
-              Nơi lưu trữ các video vần xổ gà chọi được quay trực tiếp hàng ngày lúc 18h30 tại Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk
+              Nơi lưu trữ các video vần xổ gà chọi Trại Gà Ba Anh (Trại Gà Ba Anh Em) được quay trực tiếp hàng ngày lúc 18h30 tại Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk
             </p>
           </div>
 
@@ -778,14 +782,21 @@ const ViewerPage = () => {
                 </div>
               </div>
               <p className="footer-desc">
-                Nơi hội tụ đam mê gà chọi đỉnh cao. Chuyên vần xổ gà trực tiếp 18h30 hàng ngày, giao lưu chia sẻ kỹ thuật và con giống chất lượng.
+                Trại Gà Ba Anh Em (Trại Gà Ba Anh - Trai Ga Ba Anh) nơi hội tụ đam mê gà chọi đỉnh cao. Chuyên vần xổ gà trực tiếp 18h30 hàng ngày, giao lưu chia sẻ kỹ thuật và con giống chất lượng.
               </p>
             </div>
 
             <div className="footer-col-bank">
               <h4>Tài Khoản Giao Dịch</h4>
               <div className="footer-bank-info">
-                <p className="bank-name-tag">🏦 MB Bank (Quân Đội)</p>
+                <div className="bank-brand-header">
+                  <img
+                    src="https://res.cloudinary.com/duklfdbqf/image/upload/v1794298077/Logo-VietinBank-CTG-Ori_pbtmat.webp"
+                    alt="VietinBank"
+                    className="bank-logo-img"
+                  />
+                  <p className="bank-name-tag">VietinBank</p>
+                </div>
                 <p className="bank-stk-tag">
                   STK: <strong>0799 478 478</strong>
                 </p>
@@ -821,7 +832,7 @@ const ViewerPage = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Facebook: Trần Văn Thinh
+                    Facebook: Trại Gà Ba Anh Em
                   </a>
                 </li>
                 <li>
