@@ -236,11 +236,9 @@ const ChatBox: React.FC<ChatBoxProps> = ({
       <div className="chatbox-header">
         <div className="header-left">
           <a
-            href="https://zalo.me/0931607907"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="tel:0931607907"
             className="phone-pill"
-            title="Hotline / Zalo: 0931607907"
+            title="Gọi Hotline: 0931607907"
           >
             <span className="phone-icon">📞</span>
             <span className="phone-num">0931607907</span>
