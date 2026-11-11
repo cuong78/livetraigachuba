@@ -13,14 +13,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ hlsUrl }) => {
   const [error, setError] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [supportsPiP, setSupportsPiP] = useState(false);
-
-  // Check Picture-in-Picture support
-  useEffect(() => {
-    if (document.pictureInPictureEnabled) {
-      setSupportsPiP(true);
-    }
-  }, []);
 
   // Listen for fullscreen changes
   useEffect(() => {
@@ -199,68 +191,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ hlsUrl }) => {
     }
   };
 
-  const handleToggleFullscreen = async () => {
-    const video = videoRef.current;
-    const wrapper = wrapperRef.current;
-    if (!video) return;
-
-    // 1. iOS Safari native video fullscreen
-    if ((video as any).webkitEnterFullscreen) {
-      try {
-        (video as any).webkitEnterFullscreen();
-        return;
-      } catch (err) {
-        console.warn("webkitEnterFullscreen error:", err);
-      }
-    }
-
-    // 2. Android & Desktop HTML5 Fullscreen API
-    const target = wrapper || video;
-    if (!document.fullscreenElement && !(document as any).webkitFullscreenElement) {
-      try {
-        if (target.requestFullscreen) {
-          await target.requestFullscreen();
-        } else if ((target as any).webkitRequestFullscreen) {
-          await (target as any).webkitRequestFullscreen();
-        }
-
-        // Try locking orientation to landscape on mobile
-        if (screen.orientation && (screen.orientation as any).lock) {
-          (screen.orientation as any).lock("landscape").catch(() => {});
-        }
-      } catch (err) {
-        console.warn("Fullscreen request error:", err);
-      }
-    } else {
-      try {
-        if (document.exitFullscreen) {
-          await document.exitFullscreen();
-        } else if ((document as any).webkitExitFullscreen) {
-          await (document as any).webkitExitFullscreen();
-        }
-        if (screen.orientation && (screen.orientation as any).unlock) {
-          (screen.orientation as any).unlock();
-        }
-      } catch (err) {
-        console.warn("Exit fullscreen error:", err);
-      }
-    }
-  };
-
-  const handleTogglePiP = async () => {
-    const video = videoRef.current;
-    if (!video) return;
-    try {
-      if (document.pictureInPictureElement) {
-        await document.exitPictureInPicture();
-      } else if (document.pictureInPictureEnabled && video.requestPictureInPicture) {
-        await video.requestPictureInPicture();
-      }
-    } catch (err) {
-      console.warn("Picture-in-picture error:", err);
-    }
-  };
-
   return (
     <div ref={wrapperRef} className={`video-player-wrapper ${isFullscreen ? "is-fullscreen" : ""}`}>
       <video
@@ -275,9 +205,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ hlsUrl }) => {
       />
 
       {/* Floating Action Bar Overlay */}
-      <div className="player-floating-bar">
-        {/* Unmute pill if muted */}
-        {isMuted && (
+      {isMuted && (
+        <div className="player-floating-bar">
           <button
             className="player-action-pill sound-pill"
             onClick={handleUnmute}
@@ -285,30 +214,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ hlsUrl }) => {
           >
             🔊 Bật tiếng
           </button>
-        )}
-
-        <div className="player-right-actions">
-          {/* Picture in Picture button */}
-          {supportsPiP && (
-            <button
-              className="player-action-pill pip-pill"
-              onClick={handleTogglePiP}
-              title="Xem thu nhỏ góc màn hình (PiP)"
-            >
-              🗔 Thu nhỏ
-            </button>
-          )}
-
-          {/* Fullscreen & Rotate button */}
-          <button
-            className="player-action-pill fullscreen-pill"
-            onClick={handleToggleFullscreen}
-            title={isFullscreen ? "Thu nhỏ" : "Xem toàn màn hình / Xoay ngang"}
-          >
-            {isFullscreen ? "🗗 Thu nhỏ" : "⛶ Toàn màn hình"}
-          </button>
         </div>
-      </div>
+      )}
 
       {error && (
         <div className="video-error-message">
