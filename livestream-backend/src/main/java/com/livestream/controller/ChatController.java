@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -359,6 +360,38 @@ public class ChatController {
             
         } catch (Exception e) {
             log.error("Failed to send viewer count", e);
+        }
+    }
+
+    /**
+     * Record viewer heartbeat (Redis Best Practice)
+     */
+    @MessageMapping("/viewer-heartbeat")
+    public void recordViewerHeartbeat(@Payload(required = false) Map<String, String> payload, SimpMessageHeaderAccessor headerAccessor) {
+        try {
+            String deviceId = payload != null ? payload.get("deviceId") : null;
+            if (deviceId == null || deviceId.isBlank()) {
+                deviceId = headerAccessor.getSessionId();
+            }
+            viewerCountService.recordHeartbeat(deviceId, headerAccessor.getSessionId());
+        } catch (Exception e) {
+            log.error("Failed to process viewer heartbeat", e);
+        }
+    }
+
+    /**
+     * Record viewer explicit leave
+     */
+    @MessageMapping("/viewer-leave")
+    public void recordViewerLeave(@Payload(required = false) Map<String, String> payload, SimpMessageHeaderAccessor headerAccessor) {
+        try {
+            String deviceId = payload != null ? payload.get("deviceId") : null;
+            if (deviceId == null || deviceId.isBlank()) {
+                deviceId = headerAccessor.getSessionId();
+            }
+            viewerCountService.recordLeave(deviceId);
+        } catch (Exception e) {
+            log.error("Failed to process viewer leave", e);
         }
     }
     

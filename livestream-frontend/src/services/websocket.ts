@@ -2,13 +2,27 @@ import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import type { Comment } from "@/types";
 
+export function getOrCreateDeviceId(): string {
+  try {
+    let id = localStorage.getItem("traiga_device_id");
+    if (!id) {
+      id = "dev_" + Math.random().toString(36).substring(2, 11) + "_" + Date.now().toString(36);
+      localStorage.setItem("traiga_device_id", id);
+    }
+    return id;
+  } catch {
+    return "dev_guest_" + Math.random().toString(36).substring(2, 9);
+  }
+}
+
 export class WebSocketService {
   private client: Client | null = null;
   private onMessageCallback: ((comment: Comment) => void) | null = null;
   private onHistoryCallback: ((comments: Comment[]) => void) | null = null;
   private onViewerCountCallback: ((count: number) => void) | null = null;
   private onCommentDeletedCallback: ((comment: Comment) => void) | null = null;
-    private viewerCountIntervalId: number | null = null;
+  private viewerCountIntervalId: number | null = null;
+  private heartbeatIntervalId: number | null = null;
 
   connect(
     onMessage: (comment: Comment) => void,
@@ -41,6 +55,25 @@ export class WebSocketService {
         const comment = JSON.parse(message.body) as Comment;
         this.onMessageCallback?.(comment);
       });
+
+      // Send immediate heartbeat and start periodic heartbeat (Redis Best Practice)
+      const deviceId = getOrCreateDeviceId();
+      this.client?.publish({
+        destination: "/app/viewer-heartbeat",
+        body: JSON.stringify({ deviceId }),
+      });
+
+      if (this.heartbeatIntervalId !== null) {
+        window.clearInterval(this.heartbeatIntervalId);
+      }
+      this.heartbeatIntervalId = window.setInterval(() => {
+        if (this.client?.connected) {
+          this.client.publish({
+            destination: "/app/viewer-heartbeat",
+            body: JSON.stringify({ deviceId }),
+          });
+        }
+      }, 10000); // 10 seconds heartbeat
 
       // Subscribe to viewer count
       if (this.onViewerCountCallback) {
@@ -130,7 +163,20 @@ export class WebSocketService {
       window.clearInterval(this.viewerCountIntervalId);
       this.viewerCountIntervalId = null;
     }
+    if (this.heartbeatIntervalId !== null) {
+      window.clearInterval(this.heartbeatIntervalId);
+      this.heartbeatIntervalId = null;
+    }
     if (this.client) {
+      try {
+        const deviceId = getOrCreateDeviceId();
+        if (this.client.connected) {
+          this.client.publish({
+            destination: "/app/viewer-leave",
+            body: JSON.stringify({ deviceId }),
+          });
+        }
+      } catch {}
       this.client.deactivate();
       this.client = null;
     }

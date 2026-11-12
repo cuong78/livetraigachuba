@@ -90,7 +90,9 @@ const ViewerPage = () => {
   useEffect(() => {
     const calculateViewerCount = () => {
       if (stream?.status === "LIVE") {
-        return realViewerCount + 379;
+        // Đảm bảo khi đang mở xem thì luôn có tối thiểu 1 người xem thật
+        const effectiveReal = Math.max(1, realViewerCount);
+        return effectiveReal + 379;
       } else {
         // Khi stream OFFLINE: chỉ có viewer thực (nếu có)
         return realViewerCount;
@@ -642,6 +644,40 @@ const ViewerPage = () => {
               <strong>XEM TRỰC TIẾP HÔM NAY:</strong> Truy cập website vào lúc <strong>18h30 hàng ngày</strong> để theo dõi các trận vần xổ gà chọi trực tiếp với chất lượng âm thanh và hình ảnh sắc nét nhất.
             </p>
           </div>
+
+          {/* Tech & Marketing Partner Card */}
+          <div className="tech-partner-card">
+            <div className="partner-badge-row">
+              <span className="partner-badge">⚡ ĐỐI TÁC CÔNG NGHỆ & MARKETING</span>
+            </div>
+            <div className="partner-main">
+              <div className="partner-icon-box">💻</div>
+              <div className="partner-details">
+                <h4 className="partner-title">
+                  Thiết Kế Web Bởi <strong>Cao Cương</strong> • <a href="tel:0387683857" className="partner-phone-link">0387 683 857</a>
+                </h4>
+                <p className="partner-subtitle">
+                  Chuyên thiết kế website Livestream tốc độ cao • Hỗ trợ chạy Ads, kéo khách Facebook & phát triển Fanpage chuyên nghiệp.
+                </p>
+              </div>
+            </div>
+            <div className="partner-actions">
+              <a href="tel:0387683857" className="partner-btn partner-btn-call" title="Gọi trực tiếp Cao Cương: 0387683857">
+                <span className="btn-icon">📞</span>
+                <span>0387 683 857</span>
+              </a>
+              <a
+                href="https://zalo.me/0387683857"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="partner-btn partner-btn-zalo"
+                title="Nhắn Zalo Cao Cương tư vấn thiết kế web & kéo khách"
+              >
+                <span className="btn-icon">💬</span>
+                <span>Nhắn Zalo</span>
+              </a>
+            </div>
+          </div>
         </section>
 
         {/* Rules Section */}
@@ -856,6 +892,9 @@ const ViewerPage = () => {
 
           <div className="footer-bottom-modern">
             <p>© 2026 Trại Gà Ba Anh Em • traigabaanhem.com • All Rights Reserved</p>
+            <p className="footer-credit-text">
+              Thiết kế web bởi <strong>Cao Cương</strong>: <a href="tel:0387683857">0387 683 857</a> • Hỗ trợ chạy Ads, kéo khách Facebook & Fanpage
+            </p>
           </div>
         </div>
       </footer>
