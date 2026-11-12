@@ -3,8 +3,9 @@
 
 User-agent: *
 Allow: /
-Disallow: /api/admin/
-Disallow: /api/auth/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /@*
 
 # Sitemap location
 Sitemap: https://traigabaanhem.com/sitemap.xml
