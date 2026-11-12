@@ -645,36 +645,32 @@ const ViewerPage = () => {
             </p>
           </div>
 
-          {/* Tech & Marketing Partner Card */}
-          <div className="tech-partner-card">
-            <div className="partner-badge-row">
-              <span className="partner-badge">⚡ ĐỐI TÁC CÔNG NGHỆ & MARKETING</span>
+          {/* Tech & Marketing Partner Showcase */}
+          <div className="partner-showcase-box">
+            <div className="partner-showcase-header">
+              <span className="partner-tag">DỊCH VỤ CÔNG NGHỆ & MARKETING</span>
+              <span className="partner-contact-badge">Tư vấn trực tiếp: 0387 683 857</span>
             </div>
-            <div className="partner-main">
-              <div className="partner-icon-box">💻</div>
-              <div className="partner-details">
-                <h4 className="partner-title">
-                  Thiết Kế Web Bởi <strong>Cao Cương</strong> • <a href="tel:0387683857" className="partner-phone-link">0387 683 857</a>
-                </h4>
-                <p className="partner-subtitle">
-                  Chuyên thiết kế website Livestream tốc độ cao • Hỗ trợ chạy Ads, kéo khách Facebook & phát triển Fanpage chuyên nghiệp.
-                </p>
-              </div>
+            <div className="partner-showcase-content">
+              <h4 className="partner-showcase-title">
+                Thiết Kế Web Bởi <strong>Cao Cương</strong> • <a href="tel:0387683857" className="partner-phone-link">0387 683 857</a>
+              </h4>
+              <p className="partner-showcase-desc">
+                Chuyên thiết kế website Livestream tốc độ cao • Hỗ trợ chạy Ads, kéo khách Facebook & phát triển Fanpage chuyên nghiệp.
+              </p>
             </div>
-            <div className="partner-actions">
-              <a href="tel:0387683857" className="partner-btn partner-btn-call" title="Gọi trực tiếp Cao Cương: 0387683857">
-                <span className="btn-icon">📞</span>
-                <span>0387 683 857</span>
+            <div className="partner-showcase-actions">
+              <a href="tel:0387683857" className="btn-showcase-call" title="Gọi trực tiếp: 0387683857">
+                📞 Hotline: 0387 683 857
               </a>
               <a
                 href="https://zalo.me/0387683857"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="partner-btn partner-btn-zalo"
-                title="Nhắn Zalo Cao Cương tư vấn thiết kế web & kéo khách"
+                className="btn-showcase-zalo"
+                title="Nhắn Zalo tư vấn thiết kế web & kéo khách"
               >
-                <span className="btn-icon">💬</span>
-                <span>Nhắn Zalo</span>
+                💬 Nhắn Zalo Tư Vấn
               </a>
             </div>
           </div>

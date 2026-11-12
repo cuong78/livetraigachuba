@@ -168,18 +168,21 @@
 
 /* Streamlined Inline Message Line */
 .chat-line {
-  padding: 2.5px 6px;
+  padding: 5.5px 8px 5.5px 10px;
   border-radius: 4px;
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 14.5px;
+  line-height: 1.45;
   word-break: break-word;
   cursor: pointer;
   transition: background 0.15s ease;
   user-select: text;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 2.5px solid rgba(212, 175, 55, 0.4);
+  background: rgba(255, 255, 255, 0.015);
 }
 
 .chat-line:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .badge-admin {
@@ -187,8 +190,8 @@
   background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
   color: #000000;
   font-weight: 800;
-  font-size: 9px;
-  padding: 1px 4px;
+  font-size: 10px;
+  padding: 1px 5px;
   border-radius: 3px;
   margin-right: 5px;
   vertical-align: middle;
@@ -196,37 +199,37 @@
 }
 
 .msg-author {
-  color: #dfc27d;
+  color: #f59e0b;
   font-weight: 700;
-  margin-right: 4px;
-  font-size: 12px;
+  margin-right: 5px;
+  font-size: 14.5px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .msg-reply-to {
   color: #60a5fa;
   font-weight: 600;
-  font-size: 11px;
-  margin-right: 3px;
+  font-size: 12px;
+  margin-right: 4px;
 }
 
 .msg-text {
-  color: #e2e4e9;
-  font-weight: 400;
+  color: #f8fafc;
+  font-weight: 500;
 }
 
 .badge-ip {
-  color: #71717a;
-  font-size: 9px;
+  color: #94a3b8;
+  font-size: 11px;
   margin-left: 6px;
   font-weight: 400;
 }
 
 /* Special Message Types */
 .chat-line.is-admin {
-  background: rgba(212, 175, 55, 0.07);
-  border-left: 2px solid #d4af37;
-  padding-left: 5px;
+  background: rgba(212, 175, 55, 0.1);
+  border-left: 3px solid #d4af37;
+  padding-left: 8px;
 }
 
 .chat-line.is-admin .msg-author {
@@ -235,7 +238,7 @@
 
 .chat-line.is-admin .msg-text {
   color: #ffffff;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .chat-line.is-reply {
@@ -269,23 +272,24 @@
 }
 
 .dock-input-name {
-  width: 82px;
-  height: 34px;
+  width: 110px;
+  height: 36px;
   background: #1e1f28;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 7px;
   color: #faecc8;
   font-weight: 600;
-  font-size: 11.5px;
-  padding: 0 7px;
+  font-size: 13px;
+  padding: 0 10px;
   outline: none;
   transition: all 0.2s ease;
   flex-shrink: 0;
 }
 
 .dock-input-name::placeholder {
-  color: #71717a;
+  color: #8e95a5;
   font-weight: 400;
+  font-size: 12px;
 }
 
 .dock-input-name:focus {
@@ -296,20 +300,21 @@
 
 .dock-input-msg {
   flex: 1;
-  height: 34px;
+  height: 36px;
   background: #1e1f28;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 7px;
   color: #ffffff;
-  font-size: 12px;
-  padding: 0 10px;
+  font-size: 13.5px;
+  padding: 0 12px;
   outline: none;
   min-width: 0;
   transition: all 0.2s ease;
 }
 
 .dock-input-msg::placeholder {
-  color: #71717a;
+  color: #8e95a5;
+  font-size: 13px;
 }
 
 .dock-input-msg:focus {
@@ -483,18 +488,24 @@
   }
 
   .chatbox-messages {
-    padding: 5px 6px;
-    gap: 1.5px;
+    padding: 6px 8px;
+    gap: 2px;
   }
 
   .chat-line {
-    padding: 2px 5px;
-    font-size: 11.5px;
-    line-height: 1.35;
+    padding: 5px 6px 5px 9px;
+    font-size: 13.5px;
+    line-height: 1.4;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 2.5px solid rgba(212, 175, 55, 0.45);
   }
 
   .msg-author {
-    font-size: 11.5px;
+    font-size: 13.5px;
+  }
+
+  .msg-text {
+    font-size: 13.5px;
   }
 
   .chat-dock {
@@ -502,16 +513,16 @@
   }
 
   .dock-input-name {
-    width: 72px;
-    height: 32px;
-    font-size: 11px;
-    padding: 0 6px;
+    width: 98px;
+    height: 34px;
+    font-size: 12px;
+    padding: 0 8px;
   }
 
   .dock-input-msg {
-    height: 32px;
-    font-size: 11.5px;
-    padding: 0 8px;
+    height: 34px;
+    font-size: 12.5px;
+    padding: 0 10px;
   }
 
   .dock-btn-send {

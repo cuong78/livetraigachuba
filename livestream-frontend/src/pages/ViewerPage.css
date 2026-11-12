@@ -1246,134 +1246,108 @@ body {
 }
 
 /* ==========================================================================
-   Tech & Marketing Partner Card (Cao Cương)
+   Tech & Marketing Partner Showcase (Cao Cương)
    ========================================================================== */
-.tech-partner-card {
-  background: linear-gradient(135deg, rgba(24, 28, 44, 0.85) 0%, rgba(15, 19, 32, 0.95) 100%);
-  border: 1px solid rgba(96, 165, 250, 0.25);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 15px rgba(59, 130, 246, 0.08);
-  border-radius: 14px;
-  padding: 18px 20px;
+.partner-showcase-box {
+  background: linear-gradient(145deg, #161824 0%, #0f1018 100%);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 12px rgba(212, 175, 55, 0.06);
+  border-radius: 12px;
+  padding: 16px 20px;
   margin-top: 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  backdrop-filter: blur(8px);
+  gap: 10px;
 }
 
-.partner-badge-row {
+.partner-showcase-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.partner-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(245, 158, 11, 0.12);
-  color: #f59e0b;
-  border: 1px solid rgba(245, 158, 11, 0.3);
+.partner-tag {
+  color: #d4af37;
   font-size: 11px;
   font-weight: 700;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 3px 10px;
-  border-radius: 999px;
 }
 
-.partner-main {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
+.partner-contact-badge {
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 500;
 }
 
-.partner-icon-box {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: rgba(59, 130, 246, 0.12);
-  border: 1px solid rgba(59, 130, 246, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
-}
-
-.partner-details {
-  flex: 1;
-}
-
-.partner-title {
+.partner-showcase-title {
   margin: 0;
-  font-size: 15px;
-  font-weight: 600;
-  color: #f1f5f9;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #ffffff;
   line-height: 1.4;
 }
 
-.partner-title strong {
-  color: #60a5fa;
+.partner-showcase-title strong {
+  color: #f59e0b;
 }
 
-.partner-phone-link {
-  color: #38bdf8;
-  text-decoration: none;
-  font-weight: 700;
-  transition: color 0.2s ease;
-}
-
-.partner-phone-link:hover {
-  color: #93c5fd;
-  text-decoration: underline;
-}
-
-.partner-subtitle {
-  margin: 6px 0 0 0;
+.partner-showcase-desc {
+  margin: 5px 0 0 0;
   font-size: 13px;
-  color: #94a3b8;
-  line-height: 1.5;
+  color: #a1a1aa;
+  line-height: 1.45;
 }
 
-.partner-actions {
+.partner-showcase-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
   padding-top: 4px;
 }
 
-.partner-btn {
+.btn-showcase-call {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  background: rgba(212, 175, 55, 0.12);
+  color: #f59e0b;
+  border: 1px solid rgba(212, 175, 55, 0.4);
   font-size: 13px;
   font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 7px 15px;
+  border-radius: 6px;
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.partner-btn-call {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+.btn-showcase-call:hover {
+  background: #d4af37;
+  color: #000000;
+  border-color: #d4af37;
+}
+
+.btn-showcase-zalo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #0068ff;
   color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
-.partner-btn-call:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
-  transform: translateY(-1px);
-}
-
-.partner-btn-zalo {
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-  color: #ffffff;
-}
-
-.partner-btn-zalo:hover {
-  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
-  transform: translateY(-1px);
+.btn-showcase-zalo:hover {
+  background: #0056d6;
 }
 
 .footer-credit-text {

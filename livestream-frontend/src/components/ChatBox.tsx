@@ -289,13 +289,13 @@ const ChatBox: React.FC<ChatBoxProps> = ({
         <div className="dock-row">
           <input
             type="text"
-            placeholder="👤 Tên"
+            placeholder="Nhập tên..."
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
             className="dock-input-name"
             maxLength={MAX_DISPLAY_NAME_LENGTH}
             disabled={isSubmitting}
-            title="Tên hiển thị của bạn"
+            title="Nhập tên hiển thị của bạn"
           />
           <input
             ref={inputContentRef}
