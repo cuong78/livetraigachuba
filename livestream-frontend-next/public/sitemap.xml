@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage - Trại Gà Ba Anh Em 100% Focus -->
+  <url>
+    <loc>https://traigabaanhem.com/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp</image:loc>
+      <image:title>Trại Gà Ba Anh Em (Trại Gà 3 Anh Em) - Xổ Gà Trực Tiếp 18h30</image:title>
+      <image:caption>Trại Gà Ba Anh Em chuyên xổ gà đòn trực tiếp 18h30 hàng ngày</image:caption>
+    </image:image>
+  </url>
+
+</urlset>

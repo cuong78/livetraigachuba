@@ -116,6 +116,24 @@ services:
       - livestream-network
     restart: always
 
+  # Next.js Frontend (SSR)
+  frontend-next:
+    build:
+      context: ./livestream-frontend-next
+      dockerfile: Dockerfile
+    image: livestream-frontend-next:local
+    container_name: livestream-frontend-next
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+      - BACKEND_API_URL=http://backend:8080
+    depends_on:
+      - backend
+    networks:
+      - livestream-network
+    restart: always
+
   # Nginx for HLS streaming and video playback
   hls:
     image: nginx:alpine
