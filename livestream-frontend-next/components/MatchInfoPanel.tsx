@@ -42,7 +42,7 @@ const MatchInfoPanel: React.FC<MatchInfoPanelProps> = ({ stompClient }) => {
     }
 
     if (isNaN(matchInfo.blueWeight) || matchInfo.blueWeight <= 0) {
-      alert("Trọng lượng gà đen phải là số dương!");
+      alert("Trọng lượng gà xanh phải là số dương!");
       return;
     }
 
@@ -96,7 +96,7 @@ const MatchInfoPanel: React.FC<MatchInfoPanelProps> = ({ stompClient }) => {
         </div>
         {currentMatch && (
           <span className="current-match-badge">
-            🟢 Đang hiển thị: Cặp #{currentMatch.matchNumber} ({currentMatch.redWeight}kg - {currentMatch.blueWeight}kg)
+            🟢 Đang hiển thị: Cặp #{currentMatch.matchNumber} (Đỏ: {currentMatch.redWeight}kg - Xanh: {currentMatch.blueWeight}kg)
           </span>
         )}
       </div>
@@ -131,7 +131,7 @@ const MatchInfoPanel: React.FC<MatchInfoPanelProps> = ({ stompClient }) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="blueWeight" className="label-blue">⚫ Gà Đen (kg)</label>
+            <label htmlFor="blueWeight" className="label-blue">🔵 Gà Xanh (kg)</label>
             <input
               id="blueWeight"
               type="number"

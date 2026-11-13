@@ -139,7 +139,7 @@ const MatchInfoPanel: React.FC<MatchInfoPanelProps> = ({ stompClient }) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="blueWeight">Gà Đen (kg)</label>
+          <label htmlFor="blueWeight">Gà Xanh (kg)</label>
           <input
             id="blueWeight"
             type="number"

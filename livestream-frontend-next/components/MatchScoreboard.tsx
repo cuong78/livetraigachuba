@@ -24,20 +24,26 @@ const MatchScoreboard: React.FC<MatchScoreboardProps> = ({ stompClient }) => {
 
     let subscription: any = null;
 
+    // Wait for connection to be established
     const setupSubscription = () => {
       if (!stompClient.connected) {
+        console.log("MatchScoreboard: Waiting for connection...");
         return;
       }
 
       try {
+        // Subscribe to match info updates
         subscription = stompClient.subscribe(
           "/topic/match-info",
           (message: any) => {
             try {
               const data = JSON.parse(message.body);
+              console.log("Received match info:", data);
 
               if (data.action === "clear") {
+                // Start hide animation
                 setIsHiding(true);
+                // Remove after animation completes
                 setTimeout(() => {
                   setMatchInfo(null);
                   setIsHiding(false);
@@ -57,18 +63,23 @@ const MatchScoreboard: React.FC<MatchScoreboardProps> = ({ stompClient }) => {
           }
         );
 
+        // Request current match info
         stompClient.publish({
           destination: "/app/match-info/request",
           body: JSON.stringify({}),
         });
+
+        console.log("MatchScoreboard: Subscribed to match info");
       } catch (error) {
         console.error("Failed to subscribe to match info:", error);
       }
     };
 
+    // Check if already connected
     if (stompClient.connected) {
       setupSubscription();
     } else {
+      // Wait for connection
       const onConnect = stompClient.onConnect;
       stompClient.onConnect = (frame: any) => {
         if (onConnect) onConnect(frame);
@@ -92,49 +103,24 @@ const MatchScoreboard: React.FC<MatchScoreboardProps> = ({ stompClient }) => {
   }
 
   return (
-    <div className={`match-scoreboard ${isHiding ? "hide" : ""}`}>
-      <div className="scoreboard-container">
-        {/* Match Number Badge */}
-        <div className="match-badge">
-          <span className="badge-text">TRẬN #{matchInfo.matchNumber}</span>
+    <div className={`match-scoreboard ${isHiding ? "hiding" : ""}`}>
+      <div className="scoreboard-content">
+        <div className="fighter-info fighter-red">
+          <span className="fighter-label">Đỏ:</span>
+          <span className="fighter-weight">
+            {matchInfo.redWeight.toFixed(2)} kg
+          </span>
         </div>
 
-        {/* Teams Comparison */}
-        <div className="teams-container">
-          {/* Red Team */}
-          <div className="team red-team">
-            <div className="team-header">
-              <span className="team-icon">🔴</span>
-              <span className="team-name">GÀ ĐỎ</span>
-            </div>
-            <div className="team-weight">
-              <span className="weight-value">{matchInfo.redWeight}</span>
-              <span className="weight-unit">kg</span>
-            </div>
-          </div>
-
-          {/* VS Divider */}
-          <div className="vs-divider">
-            <span className="vs-text">VS</span>
-          </div>
-
-          {/* Blue/Black Team */}
-          <div className="team blue-team">
-            <div className="team-header">
-              <span className="team-icon">⚫</span>
-              <span className="team-name">GÀ ĐEN</span>
-            </div>
-            <div className="team-weight">
-              <span className="weight-value">{matchInfo.blueWeight}</span>
-              <span className="weight-unit">kg</span>
-            </div>
-          </div>
+        <div className="match-info">
+          <span className="match-label">Cặp: {matchInfo.matchNumber}</span>
         </div>
 
-        {/* Live Indicator */}
-        <div className="live-indicator">
-          <span className="pulse-dot"></span>
-          <span className="live-text">ĐANG ĐẤU</span>
+        <div className="fighter-info fighter-blue">
+          <span className="fighter-label">Xanh:</span>
+          <span className="fighter-weight">
+            {matchInfo.blueWeight.toFixed(2)} kg
+          </span>
         </div>
       </div>
     </div>
@@ -142,4 +128,3 @@ const MatchScoreboard: React.FC<MatchScoreboardProps> = ({ stompClient }) => {
 };
 
 export default MatchScoreboard;
-
