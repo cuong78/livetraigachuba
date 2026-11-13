@@ -90,19 +90,23 @@ const MatchInfoPanel: React.FC<MatchInfoPanelProps> = ({ stompClient }) => {
   return (
     <div className="match-info-panel">
       <div className="panel-header">
-        <h3>🥊 Quản Lý Cặp Đấu</h3>
+        <div className="panel-header-title">
+          <span className="panel-icon">🥊</span>
+          <h3>Quản Lý Cặp Đấu</h3>
+        </div>
         {currentMatch && (
           <span className="current-match-badge">
-            Đang hiển thị: Trận #{currentMatch.matchNumber}
+            🟢 Đang hiển thị: Cặp #{currentMatch.matchNumber} ({currentMatch.redWeight}kg - {currentMatch.blueWeight}kg)
           </span>
         )}
       </div>
 
       <div className="panel-body">
-        <div className="form-row">
+        <div className="form-row match-form">
           <div className="form-group">
-            <label>Số Cặp Đấu</label>
+            <label htmlFor="matchNumber">Số Cặp Đấu</label>
             <input
+              id="matchNumber"
               type="number"
               min="1"
               placeholder="VD: 1, 2, 3..."
@@ -113,43 +117,47 @@ const MatchInfoPanel: React.FC<MatchInfoPanelProps> = ({ stompClient }) => {
           </div>
 
           <div className="form-group">
-            <label className="label-red">🔴 Gà Đỏ (kg)</label>
+            <label htmlFor="redWeight" className="label-red">🔴 Gà Đỏ (kg)</label>
             <input
+              id="redWeight"
               type="number"
               step="0.01"
               min="0"
               placeholder="VD: 3.25"
               value={redWeight}
               onChange={(e) => setRedWeight(e.target.value)}
-              className="input-field"
+              className="input-field red-input"
             />
           </div>
 
           <div className="form-group">
-            <label className="label-blue">⚫ Gà Đen (kg)</label>
+            <label htmlFor="blueWeight" className="label-blue">⚫ Gà Đen (kg)</label>
             <input
+              id="blueWeight"
               type="number"
               step="0.01"
               min="0"
               placeholder="VD: 3.20"
               value={blueWeight}
               onChange={(e) => setBlueWeight(e.target.value)}
-              className="input-field"
+              className="input-field blue-input"
             />
           </div>
         </div>
 
-        <div className="button-group">
+        <div className="button-group match-actions">
           <button
+            type="button"
             onClick={handleSendMatchInfo}
-            className="btn btn-primary"
+            className="btn btn-primary btn-send-match"
             disabled={!stompClient}
           >
             📡 Phát Lên Màn Hình
           </button>
           <button
+            type="button"
             onClick={handleClearMatchInfo}
-            className="btn btn-danger"
+            className="btn btn-danger btn-clear-match"
             disabled={!stompClient || !currentMatch}
           >
             🗑️ Xóa Khỏi Màn Hình
@@ -161,4 +169,3 @@ const MatchInfoPanel: React.FC<MatchInfoPanelProps> = ({ stompClient }) => {
 };
 
 export default MatchInfoPanel;
-
