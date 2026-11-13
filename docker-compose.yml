@@ -94,21 +94,8 @@ services:
     networks:
       - livestream-network
 
-  # React Frontend (Legacy)
-  frontend:
-    build:
-      context: ./livestream-frontend
-      dockerfile: Dockerfile
-    container_name: livestream-frontend
-    ports:
-      - "3000:80"
-    depends_on:
-      - backend
-    networks:
-      - livestream-network
-
   # Next.js Frontend (SSR)
-  frontend-next:
+  frontend:
     build:
       context: ./livestream-frontend-next
       dockerfile: Dockerfile
@@ -123,6 +110,7 @@ services:
       - backend
     networks:
       - livestream-network
+    restart: always
 
 volumes:
   postgres_data:
