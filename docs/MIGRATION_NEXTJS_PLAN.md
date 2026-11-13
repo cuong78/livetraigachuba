@@ -94,7 +94,73 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://traigabaanhem.com'),
   title: 'Trại Gà Ba Anh Em - Xổ Gà Trực Tiếp 18h30 Hàng Ngày | traigabaanhem.com',
   description: 'Trại Gà Ba Anh Em - Kênh phát trực tiếp vần xổ gà đòn đỉnh cao lúc 18h30 hàng ngày tại Đắk Lắk. Kết nối đam mê chiến kê, giao lưu chia sẻ kỹ thuật toàn quốc.',
-  keywords: ['trai ga ba anh', 'trại gà ba anh', 'trại gà ba anh em', 'xổ gà trực tiếp', 'gà đòn đắk lắk'],
+  keywords: [
+    // 1. Tên thương hiệu chuẩn & có dấu
+    'trại gà ba anh em',
+    'trại gà ba anh',
+    'trại gà 3 anh em',
+    'trại gà 3 anh',
+    'trại gà ba anhem',
+    'trại gà 3 anhem',
+    'trại gà anh em',
+    'gà chọi ba anh em',
+    'gà chọi 3 anh em',
+    'gà chọi ba anh',
+    'gà đòn ba anh em',
+    'gà đòn 3 anh em',
+
+    // 2. Tên thương hiệu không dấu (người dùng hay gõ tắt / mobile)
+    'trai ga ba anh em',
+    'trai ga ba anh',
+    'trai ga 3 anh em',
+    'trai ga 3 anh',
+    'trai ga ba anhem',
+    'trai ga 3 anhem',
+    'trai ga anh em',
+    'ga choi ba anh em',
+    'ga choi 3 anh em',
+    'ga choi ba anh',
+    'ga don ba anh em',
+    'ga don 3 anh em',
+
+    // 3. Viết liền không dấu / Domain / Slugs
+    'traigabaanhem',
+    'traigabaanh',
+    'traiga3anhem',
+    'traiga3anh',
+    'traigaanhem',
+    'traigabaanhem.com',
+    'www.traigabaanhem.com',
+    'traiga ba anh em',
+    'traiga 3 anh em',
+
+    // 4. Hoạt động & Dịch vụ cốt lõi (Có dấu & Không dấu)
+    'xổ gà trực tiếp',
+    'xo ga truc tiep',
+    'trực tiếp xổ gà',
+    'truc tiep xo ga',
+    'vần xổ gà',
+    'van xo ga',
+    'vần gà trực tiếp',
+    'van ga truc tiep',
+    'xổ gà 18h30',
+    'xo ga 18h30',
+    'video xổ gà',
+    'video xo ga',
+    'giao lưu gà chọi',
+    'giao luu ga choi',
+    'đá gà đòn',
+    'da ga don',
+
+    // 5. Địa phương & Chủ trại
+    'trại gà đắk lắk',
+    'trai ga dak lak',
+    'gà đòn đắk lắk',
+    'ga don dak lak',
+    'trại gà tây hòa đắk lắk',
+    'trần văn thinh',
+    'tran van thinh'
+  ],
   openGraph: {
     title: 'Trại Gà Ba Anh Em - Xổ Gà Trực Tiếp 18h30 Hàng Ngày',
     description: 'Trại Gà Ba Anh Em - Kênh phát trực tiếp vần xổ gà đòn đỉnh cao lúc 18h30 hàng ngày tại Đắk Lắk.',
@@ -200,3 +266,4 @@ export const metadata: Metadata = {
 - **Bước 1 (Anh thực hiện ở local):** Clone code, tạo nhánh, dựng Next.js theo tài liệu hướng dẫn trên.
 - **Bước 2 (Kiểm thử chức năng):** Test livestream, chat, admin tại local.
 - **Bước 3 (Review & Phối hợp):** Khi anh đẩy nhánh lên GitHub, em sẽ review toàn bộ code, tối ưu cấu hình Docker và hỗ trợ anh deploy an toàn tuyệt đối lên Production.
+
