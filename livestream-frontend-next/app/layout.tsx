@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://traigabaanhem.com"),
   title: "Trại Gà Ba Anh Em - Xổ Gà Trực Tiếp 18h30 Hàng Ngày | traigabaanhem.com",
   description:
-    "Trại Gà Ba Anh Em - Kênh phát trực tiếp vần xổ gà đòn đỉnh cao lúc 18h30 hàng ngày tại Đắk Lắk. Kết nối đam mê chiến kê, giao lưu chia sẻ kỹ thuật toàn quốc.",
+    "Trại Gà Ba Anh Em. Kênh phát trực tiếp vần xổ gà đòn đỉnh cao lúc 18h30 hàng ngày tại Đắk Lắk. Kết nối đam mê chiến kê, giao lưu chia sẻ kỹ thuật toàn quốc.",
   keywords: [
     // 1. Tên thương hiệu chuẩn & có dấu
     "trại gà ba anh em",
@@ -159,7 +159,7 @@ const jsonLdLocalBusiness = {
     "traigabaanhem.com",
   ],
   description:
-    "Trại Gà Ba Anh Em - Kênh phát trực tiếp vần xổ gà đòn đỉnh cao lúc 18h30 hàng ngày tại Đắk Lắk. Kết nối đam mê chiến kê, giao lưu chia sẻ kỹ thuật toàn quốc.",
+    "Trại Gà Ba Anh Em. Kênh phát trực tiếp vần xổ gà đòn đỉnh cao lúc 18h30 hàng ngày tại Đắk Lắk. Kết nối đam mê chiến kê, giao lưu chia sẻ kỹ thuật toàn quốc.",
   image: [
     "https://res.cloudinary.com/duklfdbqf/image/upload/v1794206741/1793800833515_8768714213416063846_8768714213416063846_83c74c8a52840f6f317e330c1ec999f5-fotor-20261109134342_qlahyg.webp",
   ],

@@ -172,3 +172,4 @@ Sau khi apply xong code:
    ```
    Đảm bảo trả về `HTTP/2 200` và `x-powered-by: Next.js`.
 4. Hướng dẫn người dùng cấu hình Cloudflare theo file [docs/CLOUDFLARE_OPTIMIZATION_GUIDE.md](file:///root/livetraigachuba/docs/CLOUDFLARE_OPTIMIZATION_GUIDE.md) để bật cache chunk `.ts` giảm lag.
+

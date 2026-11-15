@@ -573,7 +573,7 @@ const ViewerPageClient: React.FC<ViewerPageClientProps> = ({
               <span className="play-icon-glow">▶</span> Video Xem Lại
             </h2>
             <p className="section-subtitle-modern">
-              Nơi lưu trữ các video vần xổ gà chọi Trại Gà Ba Anh (Trại Gà Ba Anh Em) được quay trực tiếp hàng ngày lúc 18h30 tại Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk
+              Nơi lưu trữ các video vần xổ gà chọi Trại Gà Ba Anh Em được quay trực tiếp hàng ngày lúc 18h30 tại Thôn Phước Mỹ, Xã Tây Hòa, Tỉnh Đắk Lắk
             </p>
           </div>
 
@@ -833,8 +833,8 @@ const ViewerPageClient: React.FC<ViewerPageClientProps> = ({
                   <span className="footer-tagline">TINH HOA VIỆT</span>
                 </div>
               </div>
-              <p className="footer-desc">
-                Trại Gà Ba Anh Em (Trại Gà Ba Anh - Trai Ga Ba Anh) nơi hội tụ đam mê gà chọi đỉnh cao. Chuyên vần xổ gà trực tiếp 18h30 hàng ngày, giao lưu chia sẻ kỹ thuật và con giống chất lượng.
+              <p className="footer-desc" data-nosnippet>
+                Trại Gà Ba Anh Em — Nơi hội tụ đam mê gà chọi đỉnh cao. Chuyên vần xổ gà trực tiếp 18h30 hàng ngày, giao lưu chia sẻ kỹ thuật và con giống chất lượng.
               </p>
             </div>
 

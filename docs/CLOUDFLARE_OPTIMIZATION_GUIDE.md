@@ -189,3 +189,4 @@ Khi triển khai cho khách hàng/trại gà mới, chỉ cần đối chiếu c
 - [ ] Thêm Cache Rule: `.ts` (Eligible, 2h), `.m3u8` (Bypass), `/api` & `/ws` (Bypass).
 - [ ] Bật HTTP/3 (QUIC) + 0-RTT.
 - [ ] Tắt Rocket Loader.
+
