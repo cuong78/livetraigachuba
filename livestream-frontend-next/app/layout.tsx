@@ -243,6 +243,20 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <head>
+        {/* Google Tag (gtag.js) - Google Ads & GTM */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-NM7J34CD"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdLocalBusiness) }}
