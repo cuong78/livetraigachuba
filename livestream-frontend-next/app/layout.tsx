@@ -246,7 +246,7 @@ export default function RootLayout({
         {/* Google Tag (gtag.js) - Google Ads & GTM */}
         <script
           async
-          src="https://www.googletagmanager.com/gtm.js?id=GTM-NM7J34CD"
+          src="https://www.googletagmanager.com/gtag/js?id=GTM-NM7J34CD"
         />
         <script
           dangerouslySetInnerHTML={{
@@ -254,6 +254,8 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
+              gtag('config', 'GTM-NM7J34CD');
+              gtag('config', 'AW-18588460909');
               gtag('event', 'conversion', {'send_to': 'AW-18588460909/Ufh2CNHQlb0dEO3O1Z9F'});
             `,
           }}
