@@ -256,6 +256,7 @@ export default function RootLayout({
               gtag('js', new Date());
               gtag('config', 'GTM-NM7J34CD');
               gtag('config', 'AW-18588460909');
+              gtag('event', 'conversion', {'send_to': 'AW-18588460909/SKY2CKGhnr0dEO3O1Z9F'});
               gtag('event', 'conversion', {'send_to': 'AW-18588460909/Ufh2CNHQlb0dEO3O1Z9F'});
             `,
           }}
