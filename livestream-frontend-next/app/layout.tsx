@@ -254,6 +254,7 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
+              gtag('event', 'conversion', {'send_to': 'AW-18588460909/Ufh2CNHQlb0dEO3O1Z9F'});
             `,
           }}
         />
