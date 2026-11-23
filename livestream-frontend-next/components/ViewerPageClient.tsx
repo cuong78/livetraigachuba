@@ -387,7 +387,7 @@ const ViewerPageClient: React.FC<ViewerPageClientProps> = ({
             {/* Warning Banner */}
             <div className="warning-banner">
               <span className="warning-icon">⛔</span>
-              <span>CẤM CÁ CƯỢC, CHỬI THỀ</span>
+              <span>GIAO LƯU LÀNH MẠNH, VĂN HÓA</span>
             </div>
           </div>
 
@@ -714,8 +714,8 @@ const ViewerPageClient: React.FC<ViewerPageClientProps> = ({
               <div className="rule-box">
                 <div className="rule-icon-circle ban">✕</div>
                 <div className="rule-text">
-                  <strong>Tuyệt đối không cá cược</strong>
-                  <p>Không để lại số điện thoại giao dịch lạ, nghiêm cấm mọi hình thức cá cược vi phạm pháp luật Việt Nam.</p>
+                  <strong>Giao lưu văn minh, lành mạnh</strong>
+                  <p>Không để lại số điện thoại giao dịch lạ, tuân thủ nghiêm túc các quy định pháp luật Việt Nam.</p>
                 </div>
               </div>
             </div>
@@ -794,8 +794,8 @@ const ViewerPageClient: React.FC<ViewerPageClientProps> = ({
                     Tinh Thần Giao Lưu Vui Vẻ, Lịch Sự Trên Live Chat
                   </li>
                   <li>
-                    <strong>🚫 Không cá cược:</strong> Không Để Số Điện Thoại,
-                    Không Cá Cược Dưới Mọi Hình Thức
+                    <strong>🚫 Giao lưu lành mạnh:</strong> Không Để Số Điện Thoại Lạ,
+                    Tuân Thủ Nghiêm Quy Định Pháp Luật
                   </li>
                   <li>
                     <strong>🚫 Không chửi thề:</strong> Tuyệt đối không sử dụng

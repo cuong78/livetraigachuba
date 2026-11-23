@@ -68,8 +68,8 @@ export const metadata: Metadata = {
     "video xo ga",
     "giao lưu gà chọi",
     "giao luu ga choi",
-    "đá gà đòn",
-    "da ga don",
+    "vần xổ chiến kê",
+    "van xo chien ke",
 
     // 5. Địa phương & Chủ trại
     "trại gà đắk lắk",

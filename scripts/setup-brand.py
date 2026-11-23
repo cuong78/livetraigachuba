@@ -51,7 +51,7 @@ def generate_keywords(brand_name: str, domain: str, province: str = "") -> list:
         "trực tiếp xổ gà",
         "vần xổ gà đòn",
         "giao lưu gà chọi",
-        "đá gà đòn",
+        "vần xổ chiến kê",
     ]
     
     if province:
