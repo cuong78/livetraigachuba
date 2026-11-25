@@ -204,6 +204,14 @@ const ChatBox: React.FC<ChatBoxProps> = ({
       setContent("");
       setReplyingTo(null);
 
+      // Đóng bàn phím ảo ngay lập tức sau khi gửi để người lớn tuổi xem trọn vẹn màn hình video
+      if (inputContentRef.current) {
+        inputContentRef.current.blur();
+      }
+      if (typeof window !== "undefined" && window.innerWidth <= 768) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
       onSendComment(commentToSend);
 
       shouldScrollRef.current = true;
@@ -322,6 +330,11 @@ const ChatBox: React.FC<ChatBoxProps> = ({
             placeholder="Nhập tên..."
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
+            onBlur={() => {
+              if (typeof window !== "undefined" && window.innerWidth <= 768) {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
             className="dock-input-name"
             maxLength={MAX_DISPLAY_NAME_LENGTH}
             disabled={isSubmitting}
@@ -337,6 +350,11 @@ const ChatBox: React.FC<ChatBoxProps> = ({
             }
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            onBlur={() => {
+              if (typeof window !== "undefined" && window.innerWidth <= 768) {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
             className="dock-input-msg"
             maxLength={MAX_CONTENT_LENGTH}
             disabled={isSubmitting}

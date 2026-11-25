@@ -273,23 +273,24 @@
 
 .dock-input-name {
   width: 110px;
-  height: 36px;
+  height: 38px;
   background: #1e1f28;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 7px;
   color: #faecc8;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 16px;
   padding: 0 10px;
   outline: none;
   transition: all 0.2s ease;
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .dock-input-name::placeholder {
   color: #8e95a5;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .dock-input-name:focus {
@@ -300,21 +301,22 @@
 
 .dock-input-msg {
   flex: 1;
-  height: 36px;
+  height: 38px;
   background: #1e1f28;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 7px;
   color: #ffffff;
-  font-size: 13.5px;
+  font-size: 16px;
   padding: 0 12px;
   outline: none;
   min-width: 0;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .dock-input-msg::placeholder {
   color: #8e95a5;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .dock-input-msg:focus {
@@ -324,8 +326,8 @@
 }
 
 .dock-btn-send {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 38px;
   background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
   color: #0b0c10;
   border: none;
@@ -546,20 +548,28 @@
   }
 
   .dock-input-name {
-    width: 98px;
-    height: 34px;
-    font-size: 12px;
+    width: 95px;
+    height: 38px;
+    font-size: 16px !important;
     padding: 0 8px;
   }
 
-  .dock-input-msg {
-    height: 34px;
+  .dock-input-name::placeholder {
     font-size: 12.5px;
+  }
+
+  .dock-input-msg {
+    height: 38px;
+    font-size: 16px !important;
     padding: 0 10px;
   }
 
+  .dock-input-msg::placeholder {
+    font-size: 13.5px;
+  }
+
   .dock-btn-send {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 38px;
   }
 }
