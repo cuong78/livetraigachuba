@@ -16,9 +16,60 @@ interface ChatBoxProps {
 }
 
 const DISPLAY_NAME_KEY = "livestream_display_name";
-const MAX_COMMENTS = 60;
+const MAX_COMMENTS = 150;
 const MAX_DISPLAY_NAME_LENGTH = 30;
 const MAX_CONTENT_LENGTH = 300;
+
+// Định dạng thời gian tương đối giống Trại Gà Huynh Đệ (phút -> giờ -> ngày)
+const formatRelativeTime = (dateStr?: string): string => {
+  if (!dateStr) return "vừa xong";
+  try {
+    let parseable = dateStr.trim();
+    // Nếu chưa có múi giờ Z hay offset, backend lưu UTC nên thêm Z để parse chính xác theo giờ địa phương
+    if (
+      !parseable.endsWith("Z") &&
+      !parseable.includes("+") &&
+      !parseable.includes("-", 10)
+    ) {
+      parseable += "Z";
+    }
+
+    const date = new Date(parseable);
+    if (isNaN(date.getTime())) return "vừa xong";
+
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+
+    // Dưới 60 giây hoặc âm nhẹ do chênh lệch giây đồng hồ client/server
+    if (diffMs < 60 * 1000) {
+      return "vừa xong";
+    }
+
+    const diffMinutes = Math.floor(diffMs / (60 * 1000));
+    if (diffMinutes < 60) {
+      return `${diffMinutes} phút trước`;
+    }
+
+    const diffHours = Math.floor(diffMs / (60 * 60 * 1000));
+    if (diffHours < 24) {
+      return `${diffHours} giờ trước`;
+    }
+
+    const diffDays = Math.floor(diffMs / (24 * 60 * 60 * 1000));
+    if (diffDays < 30) {
+      return `${diffDays} ngày trước`;
+    }
+
+    const diffMonths = Math.floor(diffDays / 30);
+    if (diffMonths < 12) {
+      return `${diffMonths} tháng trước`;
+    }
+
+    return `${Math.floor(diffMonths / 12)} năm trước`;
+  } catch {
+    return "vừa xong";
+  }
+};
 
 const ChatBox: React.FC<ChatBoxProps> = ({
   comments,
@@ -35,6 +86,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [replyingTo, setReplyingTo] = useState<Comment | null>(null);
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [, setTick] = useState(0);
   const [contextMenu, setContextMenu] = useState<{
     comment: Comment;
     x: number;
@@ -50,6 +102,14 @@ const ChatBox: React.FC<ChatBoxProps> = ({
     if (savedName) {
       setDisplayName(savedName);
     }
+  }, []);
+
+  // Cập nhật lại nhãn thời gian tương đối mỗi 60 giây
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTick((t) => t + 1);
+    }, 60000);
+    return () => clearInterval(timer);
   }, []);
 
   // Auto-scroll to top for newest message when input is at the top
@@ -500,6 +560,9 @@ const ChatBox: React.FC<ChatBoxProps> = ({
                     [{comment.ipAddress}]
                   </span>
                 )}
+                <span className="msg-time" title={comment.createdAt || "Vừa xong"}>
+                  {formatRelativeTime(comment.createdAt)}
+                </span>
               </div>
             );
           })

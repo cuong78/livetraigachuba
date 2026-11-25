@@ -50,8 +50,8 @@ public class ChatController {
     private static final int RATE_LIMIT_SECONDS = 3; // 1 comment per 3 seconds
     private static final String RATE_LIMIT_PREFIX = "rate_limit:comment:";
     private static final String COMMENTS_HISTORY_KEY = "chat:comments:history";
-    private static final int MAX_COMMENTS_HISTORY = 50; // Keep last 50 comments
-    private static final long COMMENTS_TTL_HOURS = 24; // Comments expire after 24 hours
+    private static final int MAX_COMMENTS_HISTORY = 150; // Keep last 150 comments
+    private static final long COMMENTS_TTL_HOURS = 24 * 7; // Comments expire after 7 days (168 hours)
 
     @MessageMapping("/comment")
     public void sendComment(CommentDto commentDto, SimpMessageHeaderAccessor headerAccessor) {
