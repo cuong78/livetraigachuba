@@ -116,6 +116,11 @@ export const streamApi = {
     const response = await axios.get(url, { timeout: 8000 });
     return response.data;
   },
+  getTodayStatus: async (): Promise<{ hasStreamedToday: boolean }> => {
+    const url = `${getBaseApiUrl()}/stream/today-status`;
+    const response = await axios.get(url, { timeout: 8000 });
+    return response.data;
+  },
 };
 
 export const recordingApi = {

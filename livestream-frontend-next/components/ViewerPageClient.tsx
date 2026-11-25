@@ -7,6 +7,7 @@ import LoginModal from "@/components/LoginModal";
 import BlockedIpsModal from "@/components/BlockedIpsModal";
 import MatchScoreboard from "@/components/MatchScoreboard";
 import MatchInfoPanel from "@/components/MatchInfoPanel";
+import StreamStatusOverlay from "@/components/StreamStatusOverlay";
 import api, {
   streamApi,
   recordingApi,
@@ -41,11 +42,13 @@ const VideoPlayer = dynamic(() => import("@/components/VideoPlayer"), {
 interface ViewerPageClientProps {
   initialStream?: Stream | null;
   initialRecordings?: DailyRecording[];
+  initialHasStreamedToday?: boolean;
 }
 
 const ViewerPageClient: React.FC<ViewerPageClientProps> = ({
   initialStream = null,
   initialRecordings = [],
+  initialHasStreamedToday = false,
 }) => {
   const [stream, setStream] = useState<Stream | null>(initialStream);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -373,14 +376,16 @@ const ViewerPageClient: React.FC<ViewerPageClientProps> = ({
                   alt="Trại Gà Ba Anh Em - Xem Live Trực Tiếp"
                   className="cover-image"
                 />
-                <div className="play-button-overlay">
-                  <div className="play-button-circle">
-                    <svg width="50" height="50" viewBox="0 0 80 80" fill="none">
-                      <circle cx="40" cy="40" r="38" strokeWidth="4" />
-                      <path d="M32 25L55 40L32 55V25Z" fill="white" />
-                    </svg>
-                  </div>
-                </div>
+                <StreamStatusOverlay
+                  initialHasStreamedToday={initialHasStreamedToday}
+                  recordings={recordings}
+                  onScrollToRecordings={() => {
+                    const el = document.querySelector(".video-archive");
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                  }}
+                />
               </div>
             )}
 

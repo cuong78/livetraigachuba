@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface StreamRepository extends JpaRepository<Stream, Long> {
     Optional<Stream> findFirstByStatusOrderByStartedAtDesc(StreamStatus status);
+    Optional<Stream> findFirstByOrderByStartedAtDesc();
     List<Stream> findByUserIdOrderByCreatedAtDesc(Long userId);
     Optional<Stream> findFirstByUserIdAndStatus(Long userId, StreamStatus status);
 }

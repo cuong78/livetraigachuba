@@ -30,6 +30,22 @@ public class StreamService {
             .orElse(null);
     }
 
+    @Transactional(readOnly = true)
+    public boolean hasStreamedToday() {
+        java.time.ZoneId vnZone = java.time.ZoneId.of("Asia/Ho_Chi_Minh");
+        java.time.LocalDate todayVn = java.time.LocalDate.now(vnZone);
+        return streamRepository.findFirstByOrderByStartedAtDesc()
+            .map(stream -> {
+                if (stream.getStartedAt() == null) return false;
+                java.time.LocalDate streamDateVn = stream.getStartedAt()
+                    .atZone(java.time.ZoneOffset.UTC)
+                    .withZoneSameInstant(vnZone)
+                    .toLocalDate();
+                return streamDateVn.equals(todayVn);
+            })
+            .orElse(false);
+    }
+
     @Transactional
     public StreamDto startStream(Long userId, String title, String description, String hlsUrl) {
         // Check if user already has a live stream

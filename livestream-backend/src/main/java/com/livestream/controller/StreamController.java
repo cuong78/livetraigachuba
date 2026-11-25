@@ -40,6 +40,13 @@ public class StreamController {
         return ResponseEntity.ok(stream);
     }
 
+    @GetMapping("/today-status")
+    @Operation(summary = "Check if there was a live stream today", description = "Check if any stream ran today in Vietnam timezone (public)")
+    public ResponseEntity<Map<String, Boolean>> getTodayStatus() {
+        boolean hasStreamedToday = streamService.hasStreamedToday();
+        return ResponseEntity.ok(Map.of("hasStreamedToday", hasStreamedToday));
+    }
+
     // SRS Callbacks
     @PostMapping("/callback/publish")
     @Operation(summary = "SRS publish callback", description = "Called by SRS when stream starts")

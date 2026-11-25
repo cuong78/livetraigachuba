@@ -30,7 +30,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/login", "/auth/register", "/auth/refresh", "/auth/logout").permitAll()
-                .requestMatchers("/stream/current", "/stream/callback/**").permitAll()
+                .requestMatchers("/stream/current", "/stream/today-status", "/stream/callback/**").permitAll()
                 .requestMatchers("/recordings/recent", "/recordings/date/**", "/recordings/callback/**").permitAll()
                 .requestMatchers("/comments/**", "/ws/**").permitAll()
                 .requestMatchers("/location").permitAll() // Allow anonymous location tracking
