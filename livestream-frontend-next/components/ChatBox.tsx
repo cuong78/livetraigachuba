@@ -216,12 +216,27 @@ const ChatBox: React.FC<ChatBoxProps> = ({
     inputContentRef.current?.focus();
   };
 
+  // Đồng bộ class trạng thái nhập liệu lên body để CSS không bị nháy khi chuyển qua lại giữa ô Tên và ô Bình luận
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (isInputFocused) {
+      document.body.classList.add("chat-input-active");
+    } else {
+      document.body.classList.remove("chat-input-active");
+    }
+    return () => {
+      document.body.classList.remove("chat-input-active");
+    };
+  }, [isInputFocused]);
+
   // Đưa khung video lên sát đỉnh màn hình ngay lập tức (1 phát ăn ngay, không delay kéo từ từ)
   const snapToVideoTop = () => {
     if (typeof window === "undefined" || window.innerWidth > 768) return;
     const videoSection = document.querySelector(".video-section") as HTMLElement;
     if (videoSection) {
       const rect = videoSection.getBoundingClientRect();
+      // Nếu khung video đã nằm đúng ở đỉnh màn hình (sai số <= 8px), không cuộn lại để tránh nháy màn hình
+      if (Math.abs(rect.top) <= 8) return;
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const targetY = Math.max(0, rect.top + scrollTop);
       window.scrollTo(0, targetY);
@@ -229,8 +244,14 @@ const ChatBox: React.FC<ChatBoxProps> = ({
   };
 
   const handleInputFocus = () => {
+    const wasAlreadyFocused = isInputFocused;
     setIsInputFocused(true);
     if (typeof window !== "undefined" && window.innerWidth <= 768) {
+      if (wasAlreadyFocused) {
+        // Đã mở bàn phím sẵn (chuyển từ ô Tên sang ô Bình luận), chỉ kiểm tra nhẹ xem có bị lệch không
+        requestAnimationFrame(snapToVideoTop);
+        return;
+      }
       snapToVideoTop();
       requestAnimationFrame(snapToVideoTop);
       setTimeout(snapToVideoTop, 120);

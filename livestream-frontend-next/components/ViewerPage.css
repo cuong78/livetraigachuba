@@ -1801,7 +1801,7 @@ body {
 
 /* Tự động ẩn nút gọi & Zalo khi người dùng đang nhập phím trên di động (Android & iPhone) để không che ô chat */
 @media (max-width: 768px) {
-  body:has(input:focus) .floating-buttons,
+  body.chat-input-active .floating-buttons,
   body:has(textarea:focus) .floating-buttons {
     opacity: 0 !important;
     pointer-events: none !important;
@@ -2092,22 +2092,19 @@ body {
   }
 
   /* Khi đang nhập bình luận trên di động, co gọn chiều cao chat-section về 190px để video không bị che khuất */
-  body:has(.dock-input-name:focus) .chat-section,
-  body:has(.dock-input-msg:focus) .chat-section,
+  body.chat-input-active .chat-section,
   .chat-section:has(.is-focused) {
     height: 190px !important;
     max-height: 190px !important;
   }
 
-  body:has(.dock-input-name:focus) .main-content,
-  body:has(.dock-input-msg:focus) .main-content {
+  body.chat-input-active .main-content {
     gap: 4px !important;
     margin-top: 2px !important;
     margin-bottom: 6px !important;
   }
 
-  body:has(.dock-input-name:focus) .warning-banner,
-  body:has(.dock-input-msg:focus) .warning-banner {
+  body.chat-input-active .warning-banner {
     padding: 3px 6px !important;
     font-size: 11px !important;
   }
