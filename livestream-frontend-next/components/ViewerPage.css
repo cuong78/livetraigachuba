@@ -2089,6 +2089,28 @@ body {
   .chat-section {
     height: 370px;
     max-height: 390px;
+    transition: height 0.2s ease;
+  }
+
+  /* Khi đang nhập bình luận trên di động, co gọn chiều cao chat-section về 190px để video không bị che khuất */
+  body:has(.dock-input-name:focus) .chat-section,
+  body:has(.dock-input-msg:focus) .chat-section,
+  .chat-section:has(.is-focused) {
+    height: 190px !important;
+    max-height: 190px !important;
+  }
+
+  body:has(.dock-input-name:focus) .main-content,
+  body:has(.dock-input-msg:focus) .main-content {
+    gap: 4px !important;
+    margin-top: 2px !important;
+    margin-bottom: 6px !important;
+  }
+
+  body:has(.dock-input-name:focus) .warning-banner,
+  body:has(.dock-input-msg:focus) .warning-banner {
+    padding: 3px 6px !important;
+    font-size: 11px !important;
   }
 
   .stream-title {

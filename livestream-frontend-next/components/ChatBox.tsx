@@ -34,6 +34,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [replyingTo, setReplyingTo] = useState<Comment | null>(null);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const [contextMenu, setContextMenu] = useState<{
     comment: Comment;
     x: number;
@@ -155,6 +156,86 @@ const ChatBox: React.FC<ChatBoxProps> = ({
     inputContentRef.current?.focus();
   };
 
+  // Tự động cuộn đưa khung video lên sát đỉnh màn hình khi người dùng bấm nhập bình luận
+  const scrollToVideoTop = () => {
+    if (typeof window === "undefined" || window.innerWidth > 768) return;
+    const videoSection = document.querySelector(".video-section") as HTMLElement;
+    if (videoSection) {
+      const rect = videoSection.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const targetY = Math.max(0, rect.top + scrollTop);
+      window.scrollTo({
+        top: targetY,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const handleInputFocus = () => {
+    setIsInputFocused(true);
+    if (typeof window !== "undefined" && window.innerWidth <= 768) {
+      scrollToVideoTop();
+      setTimeout(scrollToVideoTop, 80);
+      setTimeout(scrollToVideoTop, 200);
+      setTimeout(scrollToVideoTop, 400);
+    }
+  };
+
+  const handleInputBlur = () => {
+    if (typeof window !== "undefined" && window.innerWidth <= 768) {
+      setTimeout(() => {
+        const active = document.activeElement;
+        if (
+          !active ||
+          (!active.classList.contains("dock-input-name") &&
+            !active.classList.contains("dock-input-msg"))
+        ) {
+          setIsInputFocused(false);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }, 150);
+    } else {
+      setIsInputFocused(false);
+    }
+  };
+
+  // Giữ cố định khung video ở đỉnh màn hình khi bàn phím ảo hiển thị trên mobile
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.visualViewport) return;
+
+    const handleViewportChange = () => {
+      if (window.innerWidth > 768) return;
+      const active = document.activeElement;
+      if (
+        active &&
+        (active.classList.contains("dock-input-name") ||
+          active.classList.contains("dock-input-msg"))
+      ) {
+        const videoSection = document.querySelector(".video-section") as HTMLElement;
+        if (videoSection) {
+          const rect = videoSection.getBoundingClientRect();
+          // Nếu khung video bị đẩy lên trên mép màn hình quá 8px, kéo về đỉnh
+          if (rect.top < -8) {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            window.scrollTo({
+              top: rect.top + scrollTop,
+              behavior: "smooth",
+            });
+          }
+        }
+      }
+    };
+
+    const vv = window.visualViewport;
+    vv.addEventListener("resize", handleViewportChange);
+    vv.addEventListener("scroll", handleViewportChange);
+
+    return () => {
+      vv.removeEventListener("resize", handleViewportChange);
+      vv.removeEventListener("scroll", handleViewportChange);
+    };
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -269,7 +350,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({
   };
 
   return (
-    <div className="chatbox-container">
+    <div className={`chatbox-container ${isInputFocused ? "is-focused" : ""}`}>
       {/* 1. Sleek Top Bar */}
       <div className="chatbox-header">
         <div className="header-left">
@@ -330,11 +411,8 @@ const ChatBox: React.FC<ChatBoxProps> = ({
             placeholder="Nhập tên..."
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
-            onBlur={() => {
-              if (typeof window !== "undefined" && window.innerWidth <= 768) {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }
-            }}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
             className="dock-input-name"
             maxLength={MAX_DISPLAY_NAME_LENGTH}
             disabled={isSubmitting}
@@ -350,11 +428,8 @@ const ChatBox: React.FC<ChatBoxProps> = ({
             }
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            onBlur={() => {
-              if (typeof window !== "undefined" && window.innerWidth <= 768) {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }
-            }}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
             className="dock-input-msg"
             maxLength={MAX_CONTENT_LENGTH}
             disabled={isSubmitting}
