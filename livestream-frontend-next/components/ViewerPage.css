@@ -1796,6 +1796,17 @@ body {
   flex-direction: column;
   gap: 12px;
   z-index: 999;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Tự động ẩn nút gọi & Zalo khi người dùng đang nhập phím trên di động (Android & iPhone) để không che ô chat */
+@media (max-width: 768px) {
+  body:has(input:focus) .floating-buttons,
+  body:has(textarea:focus) .floating-buttons {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: scale(0.8);
+  }
 }
 
 .fab-btn {
