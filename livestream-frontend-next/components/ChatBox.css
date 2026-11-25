@@ -501,10 +501,9 @@
   .chatbox-container {
     max-height: 400px;
     border-radius: 8px;
-    transition: max-height 0.2s ease, height 0.2s ease;
   }
 
-  /* Khi người dùng bấm vào ô nhập trên di động, tự động co gọn chiều cao box chat về 190px */
+  /* Khi người dùng bấm vào ô nhập trên di động, tự động co gọn chiều cao box chat về 190px tức thì */
   .chatbox-container.is-focused {
     height: 190px !important;
     max-height: 190px !important;

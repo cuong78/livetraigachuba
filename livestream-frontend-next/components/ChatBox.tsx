@@ -156,28 +156,24 @@ const ChatBox: React.FC<ChatBoxProps> = ({
     inputContentRef.current?.focus();
   };
 
-  // Tự động cuộn đưa khung video lên sát đỉnh màn hình khi người dùng bấm nhập bình luận
-  const scrollToVideoTop = () => {
+  // Đưa khung video lên sát đỉnh màn hình ngay lập tức (1 phát ăn ngay, không delay kéo từ từ)
+  const snapToVideoTop = () => {
     if (typeof window === "undefined" || window.innerWidth > 768) return;
     const videoSection = document.querySelector(".video-section") as HTMLElement;
     if (videoSection) {
       const rect = videoSection.getBoundingClientRect();
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const targetY = Math.max(0, rect.top + scrollTop);
-      window.scrollTo({
-        top: targetY,
-        behavior: "smooth",
-      });
+      window.scrollTo(0, targetY);
     }
   };
 
   const handleInputFocus = () => {
     setIsInputFocused(true);
     if (typeof window !== "undefined" && window.innerWidth <= 768) {
-      scrollToVideoTop();
-      setTimeout(scrollToVideoTop, 80);
-      setTimeout(scrollToVideoTop, 200);
-      setTimeout(scrollToVideoTop, 400);
+      snapToVideoTop();
+      requestAnimationFrame(snapToVideoTop);
+      setTimeout(snapToVideoTop, 120);
     }
   };
 
@@ -191,15 +187,15 @@ const ChatBox: React.FC<ChatBoxProps> = ({
             !active.classList.contains("dock-input-msg"))
         ) {
           setIsInputFocused(false);
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          window.scrollTo(0, 0);
         }
-      }, 150);
+      }, 80);
     } else {
       setIsInputFocused(false);
     }
   };
 
-  // Giữ cố định khung video ở đỉnh màn hình khi bàn phím ảo hiển thị trên mobile
+  // Giữ cố định khung video ở đỉnh màn hình khi bàn phím ảo hiển thị trên mobile (chốt cứng tức thì)
   useEffect(() => {
     if (typeof window === "undefined" || !window.visualViewport) return;
 
@@ -214,13 +210,10 @@ const ChatBox: React.FC<ChatBoxProps> = ({
         const videoSection = document.querySelector(".video-section") as HTMLElement;
         if (videoSection) {
           const rect = videoSection.getBoundingClientRect();
-          // Nếu khung video bị đẩy lên trên mép màn hình quá 8px, kéo về đỉnh
-          if (rect.top < -8) {
+          // Nếu khung video bị đẩy lên trên mép màn hình quá 6px, đưa về đỉnh tức thì
+          if (rect.top < -6) {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            window.scrollTo({
-              top: rect.top + scrollTop,
-              behavior: "smooth",
-            });
+            window.scrollTo(0, rect.top + scrollTop);
           }
         }
       }
@@ -285,12 +278,13 @@ const ChatBox: React.FC<ChatBoxProps> = ({
       setContent("");
       setReplyingTo(null);
 
-      // Đóng bàn phím ảo ngay lập tức sau khi gửi để người lớn tuổi xem trọn vẹn màn hình video
+      // Đóng bàn phím ảo ngay lập tức sau khi gửi
       if (inputContentRef.current) {
         inputContentRef.current.blur();
       }
+      setIsInputFocused(false);
       if (typeof window !== "undefined" && window.innerWidth <= 768) {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo(0, 0);
       }
 
       onSendComment(commentToSend);

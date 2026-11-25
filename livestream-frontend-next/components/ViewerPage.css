@@ -2089,7 +2089,6 @@ body {
   .chat-section {
     height: 370px;
     max-height: 390px;
-    transition: height 0.2s ease;
   }
 
   /* Khi đang nhập bình luận trên di động, co gọn chiều cao chat-section về 190px để video không bị che khuất */
